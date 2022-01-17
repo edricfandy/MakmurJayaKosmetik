@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/layoutProductViewLongNoPicture_mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        app:cardElevation="2dp"
+        app:contentPadding="10dp" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:baselineAligned="false">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/layoutProductViewLongNoPicture_txtId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center_vertical"
+                        android:text="@string/product_id"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/layoutProductViewLongNoPicture_txtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:textSize="16sp"
+                        android:text="Product Name"
+                        tools:ignore="hardcodedText" />
+
+                    <TextView
+                        android:id="@+id/layoutProductViewLongNoPicture_txtPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp75.000,-"
+                        tools:ignore="hardcodedText" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutProductViewLongNoPicture_layoutEditPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone" >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp"
+                            android:textSize="12sp"
+                            tools:ignore="hardcodedText" />
+
+                        <EditText
+                            android:id="@+id/layoutProductViewLongNoPicture_etPrice"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:padding="0dp"
+                            android:gravity="center"
+                            android:digits="1234567890"
+                            android:inputType="textFilter" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/layoutProductViewLongNoPicture_lblTotalItem"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="Total Item:"
+                        android:textSize="12sp"
+                        tools:ignore="hardcodedText" />
+                    <LinearLayout
+                        android:id="@+id/layoutProductViewLongNoPicture_layoutEditTotalItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/layoutProductViewLongNoPicture_btnMin"
+                            android:layout_width="20dp"
+                            android:layout_height="30dp"
+                            app:backgroundTint="@color/red"
+                            app:icon="@drawable/ic_min"
+                            app:iconGravity="top"
+                            app:iconSize="10dp"
+                            app:iconTint="@color/white" />
+                        <TextView
+                            android:id="@+id/layoutProductViewLongNoPicture_txtTotalItemEdit"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/layoutProductViewLongNoPicture_btnPlus"
+                            android:layout_width="20dp"
+                            android:layout_height="30dp"
+                            app:backgroundTint="@color/green"
+                            app:icon="@drawable/ic_add"
+                            app:iconGravity="top"
+                            app:iconSize="10dp"
+                            app:iconTint="@color/white" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/layoutProductViewLongNoPicture_txtTotalItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="@string/total_item"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="5dp"
+                        android:text="Subtotal:"
+                        android:textSize="12sp"
+                        tools:ignore="hardcodedText" />
+                    <TextView
+                        android:id="@+id/layoutProductViewLongNoPicture_txtSubtotalPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="Rp 175.000,-"
+                        tools:ignore="hardcodedText" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                <LinearLayout
+                    android:id="@+id/layoutProductViewLongNoPicture_layoutVariantAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone" >
+                    <TextView
+                        android:id="@+id/layoutProductViewLongNoPicture_txtVariantName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Variant:"
+                        tools:ignore="hardcodedText" />
+                    <TextView
+                        android:id="@+id/layoutProductViewLongNoPicture_txtSelectedVariant"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layoutProductViewLongNoPicture_layoutEditVariantAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone" >
+                    <TextView
+                        android:id="@+id/layoutProductViewLongNoPicture_txtVariantName2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Variant Name (Stock)"
+                        tools:ignore="hardcodedText" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:text="Amount"
+                        tools:ignore="hardcodedText" />
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/layoutProductViewLongNoPicture_rvVariantAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/layoutProductViewLongNoPicture_txtEditedTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:fontFamily="@font/opensans_bold"
+            android:background="@color/green"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/layoutProductViewLongNoPicture_txtProductRemoved"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@color/translucent"
+            android:text="Product has been removed from list"
+            tools:ignore="hardcodedText"
+            android:visibility="gone" />
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

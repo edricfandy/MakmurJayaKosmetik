@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:contentPadding="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                <TextView
+                    android:id="@+id/layoutPaymentView_txtDatetime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mon, 3 January 2022 12:23:42"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/layoutPaymentView_txtPaymentId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="16sp"
+                    android:text="SamplePaymentId"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/layoutPaymentView_txtPurchaseId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Payment for SamplePurchaseID"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/layoutPaymentView_txtTotalPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="15sp"
+                android:textColor="@color/blue"
+                android:text="Rp 2.000.000,-"
+                tools:ignore="hardcodedText" />
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/layoutPaymentView_layoutHidden"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/layoutPaymentView_txtPaymentMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Message."
+                tools:ignore="hardcodedText" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/layoutPaymentView_btnDeletePayment"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:letterSpacing="0"
+                app:strokeWidth="0dp"
+                android:textColor="@color/red"
+                android:textSize="12sp"
+                android:text="DELETE PAYMENT"
+                tools:ignore="hardcodedText"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+        </LinearLayout>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

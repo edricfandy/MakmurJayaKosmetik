@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:backgroundTint="@color/white" >
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/dialogAddEditSupplier_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="Manage Supplier"
+            app:navigationIcon="@drawable/ic_close"
+            app:titleTextAppearance="@style/DefaultToolbarTitleTextStyle" >
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialogAddEditSupplier_btnConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/blue"
+                android:text="@string/add"
+                style="@style/Widget.AppCompat.Button.Borderless" />
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="50dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true" >
+            <TextView
+                android:id="@+id/dialogAddEditSupplier_txtHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textAllCaps="true"
+                android:text="Add Supplier"
+                tools:ignore="hardcodedText" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:startIconDrawable="@drawable/ic_barcode"
+                android:hint="Supplier ID"
+                app:helperText="*Required"
+                style="@style/DefaultEditTextStyle"
+                tools:ignore="hardcodedText" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialogAddEditSupplier_etId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <CheckBox
+                android:id="@+id/dialogAddEditSupplier_cbAutoGenId"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:text="Auto Generate ID"
+                tools:ignore="hardcodedText" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:startIconDrawable="@drawable/ic_contact"
+                android:hint="Supplier Name"
+                app:helperText="*Required"
+                style="@style/DefaultEditTextStyle"
+                tools:ignore="hardcodedText" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialogAddEditSupplier_etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:startIconDrawable="@drawable/ic_location"
+                android:hint="Address"
+                style="@style/DefaultEditTextStyle"
+                tools:ignore="hardcodedText" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialogAddEditSupplier_etAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:startIconDrawable="@drawable/ic_city"
+                android:hint="City"
+                app:helperText="*Required"
+                style="@style/DefaultEditTextStyle"
+                tools:ignore="hardcodedText" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialogAddEditSupplier_etCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:prefixText="(+62)-"
+                app:startIconDrawable="@drawable/ic_phone"
+                android:hint="Phone Number"
+                style="@style/DefaultEditTextStyle"
+                tools:ignore="hardcodedText" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialogAddEditSupplier_etPhoneNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:startIconDrawable="@drawable/ic_email"
+                android:hint="E-mail Address"
+                style="@style/DefaultEditTextStyle"
+                tools:ignore="hardcodedText" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialogAddEditSupplier_etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

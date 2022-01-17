@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:backgroundTint="@color/white" >
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/dialogMakePayment_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="Payment"
+            app:navigationIcon="@drawable/ic_close"
+            android:fontFamily="@font/poppins_regular"
+            app:titleTextAppearance="@style/DefaultToolbarTitleTextStyle" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_marginTop="60dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment for Purchase ID: "
+                tools:ignore="hardcodedText" />
+            <TextView
+                android:id="@+id/dialogMakePayment_txtPurchaseId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="SamplePurchaseID"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total Purchase"
+                tools:ignore="hardcodedText" />
+            <TextView
+                android:id="@+id/dialogMakePayment_txtTotalPurchase"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Rp 5.000.000"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total Paid"
+                tools:ignore="hardcodedText" />
+            <TextView
+                android:id="@+id/dialogMakePayment_txtTotalPaid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Rp 2.000.000"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Debt Remain"
+                tools:ignore="hardcodedText" />
+            <TextView
+                android:id="@+id/dialogMakePayment_txtDebtRemain"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Rp 3.000.000"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:startIconDrawable="@drawable/ic_pay"
+            app:prefixText="IDR"
+            android:hint="Payment Amount"
+            tools:ignore="hardcodedText"
+            style="@style/DefaultEditTextStyle" >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialogMakePayment_etPaymentAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789"
+                android:inputType="textFilter" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:startIconDrawable="@drawable/ic_description"
+            android:hint="Message (Optional)"
+            style="@style/DefaultEditTextStyle"
+            tools:ignore="HardcodedText">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialogMakePayment_etMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:maxLines="3" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Debt remain after this payment"
+                tools:ignore="hardcodedText" />
+            <TextView
+                android:id="@+id/dialogMakePayment_txtDebtRemainAfterPayment"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end|center"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/blue"
+                android:text="Rp 3.000.000"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogMakePayment_btnMakePayment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cornerRadius="10dp"
+            android:textColor="@color/white"
+            android:text="Make Payment"
+            tools:ignore="hardcodedText" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

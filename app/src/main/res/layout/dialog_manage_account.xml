@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <include
+        android:id="@+id/dialogManageAccount_layoutAccountInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/layout_account_view" />
+    <TextView
+        android:id="@+id/dialogManageAccount_btnCreateNewAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Create new account"
+        tools:ignore="hardcodedText" />
+    <TextView
+        android:id="@+id/dialogManageAccount_btnChangePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Change password"
+        tools:ignore="hardcodedText" />
+    <TextView
+        android:id="@+id/dialogManageAccount_btnControlAccess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Control Access"
+        tools:ignore="hardcodedText" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Use image for product"
+            tools:ignore="hardcodedText" />
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/dialogManageAccount_swUseImage"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/dialogManageAccount_btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Logout"
+        tools:ignore="hardcodedText" />
+</LinearLayout>

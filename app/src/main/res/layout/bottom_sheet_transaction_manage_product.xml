@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp"
+    android:paddingBottom="50dp"
+    android:orientation="vertical" >
+    <include
+        android:id="@+id/bottomSheetManageTransactionProduct_layoutProductViewLong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        layout="@layout/layout_product_view_long" />
+    <include
+        android:id="@+id/bottomSheetManageTransactionProduct_layoutProductViewLongNoPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        layout="@layout/layout_product_view_long_no_picture" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="40dp"
+        android:layout_marginTop="10dp">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bottomSheetManageTransactionProduct_btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cornerRadius="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@color/grey"
+            android:textColor="@color/white"
+            android:text="@string/cancel" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bottomSheetManageTransactionProduct_btnConfirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cornerRadius="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@color/green"
+            android:textColor="@color/white"
+            android:text="@string/add" />
+    </LinearLayout>
+</LinearLayout>

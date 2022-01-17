@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:contentPadding="10dp"
+    app:strokeColor="@color/light_grey"
+    app:strokeWidth="1dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="15dp">
+            <TextView
+                android:id="@+id/layoutSalesView_txtDatetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Mon, 8 November 2021 13:00:00"
+                tools:ignore="hardcodedText" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp" >
+                <TextView
+                    android:id="@+id/layoutSalesView_txtType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:text="Sales Type"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="3dp"
+                    android:textSize="12sp"
+                    android:text="via"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/layoutSalesView_txtStore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    app:drawableStartCompat="@drawable/ic_whatsapp"
+                    android:drawablePadding="5dp"
+                    android:textSize="12sp"
+                    android:text="WhatsApp"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/layoutSalesView_txtId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="16sp"
+                android:text="SampleSalesID"
+                tools:ignore="hardcodedText" />
+            <TextView
+                android:id="@+id/layoutSalesView_txtTotalItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Total Item"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:orientation="vertical" >
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/layoutSalesView_txtItemStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="end|top"
+                android:layout_marginHorizontal="0dp"
+                android:clickable="false"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                style="@style/ButtonBullets"
+                app:strokeColor="@color/white"
+                android:text="Item Status"
+                tools:ignore="hardcodedText" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/layoutSalesView_txtPaymentStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="end|top"
+                android:layout_marginHorizontal="0dp"
+                android:layout_marginTop="5dp"
+                android:clickable="false"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                style="@style/ButtonBullets"
+                app:strokeColor="@color/white"
+                android:text="Payment Status"
+                tools:ignore="hardcodedText" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:text="Total Purchase:"
+                tools:ignore="hardcodedText" />
+            <TextView
+                android:id="@+id/layoutSalesView_txtTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="end"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/blue"
+                android:textSize="18sp"
+                android:text="Rp 175.000,-"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

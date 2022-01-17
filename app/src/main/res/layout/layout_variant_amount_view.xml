@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:id="@+id/layoutVariantAmountView_layoutInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/layoutVariantAmountView_btnRemove"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:src="@drawable/ic_remove"
+            app:tint="@color/red"
+            android:contentDescription="Remove"
+            tools:ignore="hardcodedText" />
+        <EditText
+            android:id="@+id/layoutVariantAmountView_etVariant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:inputType="text"
+            android:maxLength="20"
+            android:gravity="center|bottom"
+            android:textSize="14sp"
+            android:hint="Specify the variant"
+            tools:ignore="hardcodedText" />
+        <EditText
+            android:id="@+id/layoutVariantAmountView_etAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:digits="1234567890"
+            android:inputType="textFilter"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:hint="Specify the amount"
+            tools:ignore="hardcodedText" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutVariantAmountView_layoutInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/layoutVariantAmountView_txtVariant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center|bottom"
+            android:text="VariantSample"
+            tools:ignore="hardcodedText" />
+        <TextView
+            android:id="@+id/layoutVariantAmountView_txtAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="3"
+            tools:ignore="hardcodedText" />
+        <LinearLayout
+            android:id="@+id/layoutVariantAmountView_layoutEditAmount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/layoutVariantAmountView_btnMin"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                app:backgroundTint="@color/red"
+                app:icon="@drawable/ic_min"
+                app:iconGravity="top"
+                app:iconSize="10dp"
+                app:iconTint="@color/white" />
+            <TextView
+                android:id="@+id/layoutVariantAmountView_txtTotalItemEdit"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/layoutVariantAmountView_btnPlus"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                app:backgroundTint="@color/green"
+                app:icon="@drawable/ic_add"
+                app:iconGravity="top"
+                app:iconSize="10dp"
+                app:iconTint="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

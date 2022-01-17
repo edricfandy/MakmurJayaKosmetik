@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ProductFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="20dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:text="@string/search" />
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+            <EditText
+                android:id="@+id/manageProduct_etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/image_background"
+                android:inputType="text"
+                android:paddingHorizontal="10dp"
+                android:importantForAutofill="no"
+                tools:ignore="LabelFor" />
+            <ImageView
+                android:id="@+id/manageProduct_btnSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/search"
+                android:src="@drawable/ic_search" />
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/manageProduct_btnFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_filter"
+            app:tint="@color/blue"
+            android:contentDescription="filter"
+            tools:ignore="hardcodedText" />
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/manageProduct_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="10dp"
+        android:paddingBottom="80dp"
+        android:layout_marginTop="70dp"
+        android:clipToPadding="false" />
+    <LinearLayout
+        android:id="@+id/manageProduct_layoutEmptyItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:visibility="gone" >
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_empty_box"
+            android:contentDescription="Empty Box"
+            tools:ignore="hardcodedText" />
+        <TextView
+            android:id="@+id/manageProduct_msgEmptyItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginHorizontal="30dp"
+            android:textSize="16sp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/manageProduct_btnAddItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="50dp"
+            android:backgroundTint="@color/green"
+            android:drawableLeft="@drawable/ic_add"
+            android:drawableTint="@color/white"
+            android:textColor="@color/white"
+            android:text="TAMBAH PRODUK"
+            tools:ignore="hardcodedText" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/manageProduct_txtNoItemMatches"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="No item matches the search keyword."
+        tools:ignore="hardcodedText"
+        android:visibility="gone" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/manageProduct_fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="30dp"
+        android:backgroundTint="@color/blue"
+        app:tint="@color/white"
+        android:src="@drawable/ic_add"
+        android:contentDescription="@string/add" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

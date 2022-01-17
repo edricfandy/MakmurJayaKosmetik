@@ -1,0 +1,124 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.MakmurJayaKosmetik" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/green</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorOnSurface">@color/dark_brown</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/brown</item>
+        <item name="colorSecondaryVariant">@color/middle_yellow</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:fontFamily">@font/opensans_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <!-- Customize your theme here. -->
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeStyle">@style/Widget.App.ActionMode</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_close</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
+
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.App.BottomSheetDialog</item>
+
+    </style>
+    <style name="Widget.App.ActionMode" parent="Widget.AppCompat.ActionBar">
+        <item name="titleTextStyle">@style/Widget.App.ActionMode.TitleTextStyle</item>
+        <item name="subtitleTextStyle">?attr/textAppearanceSubtitle1</item>
+        <item name="background">@color/white</item>
+    </style>
+    <style name="Widget.App.ActionMode.TitleTextStyle">
+        <item name="fontFamily">@font/opensans_regular</item>
+        <item name="android:textSize">20sp</item>
+        <item name="titleTextColor">@color/black</item>
+    </style>
+    <style name="Widget.App.NavigationView" parent="Widget.MaterialComponents.NavigationView" >
+        <item name="itemTextAppearance">@style/NavigationViewTextAppearance</item>
+        <item name="itemIconTint">@color/color_drawer_item</item>
+        <item name="itemTextColor">@color/color_drawer_item</item>
+        <item name="itemShapeFillColor">@color/color_drawer_item_background</item>
+    </style>
+    <style name="NavigationViewTextAppearance">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+    <style name="ThemeOverlay.App.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ModalBottomSheetDialog</item>
+    </style>
+    <style name="ModalBottomSheetDialog" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="shapeAppearance">@style/ShapeAppearance.App.LargeComponent</item>
+    </style>
+    <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+    <style name="FullScreenDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+    <style name="FullScreenDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/anim_open_dialog_from_fab</item>
+        <item name="android:windowExitAnimation">@anim/anim_close_dialog_from_fab</item>
+    </style>
+
+    <style name="DefaultToolbarTitleTextStyle">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="DefaultEditTextFontStyle">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="DefaultEditTextStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
+        <item name="android:textAppearance">@style/DefaultEditTextFontStyle</item>
+        <item name="prefixTextAppearance">@style/DefaultEditTextFontStyle</item>
+        <item name="hintTextColor">@color/blue</item>
+        <item name="helperTextEnabled">true</item>
+        <item name="errorEnabled">true</item>
+        <item name="helperTextTextAppearance">@font/poppins_regular</item>
+        <item name="errorTextAppearance">@font/poppins_regular</item>
+        <item name="startIconTint">@color/dark_brown</item>
+    </style>
+
+
+    <style name="DefaultAutoCompleteDropdownStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorOnSurface">@color/dark_brown</item>
+        <item name="strokeColor">@color/dark_brown</item>
+        <item name="hintTextColor">@color/blue</item>
+        <item name="android:textAppearance">@style/DefaultEditTextFontStyle</item>
+        <item name="prefixTextAppearance">@style/DefaultEditTextFontStyle</item>
+        <item name="helperTextEnabled">true</item>
+        <item name="errorEnabled">true</item>
+        <item name="helperTextTextAppearance">@font/poppins_regular</item>
+        <item name="errorTextAppearance">@font/poppins_regular</item>
+        <item name="startIconTint">@color/dark_brown</item>
+    </style>
+
+    <style name="DefaultExposedDropdownStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu" >
+        <item name="android:textAppearance">@style/DefaultEditTextFontStyle</item>
+        <item name="prefixTextAppearance">@style/DefaultEditTextFontStyle</item>
+        <item name="hintTextColor">@color/blue</item>
+        <item name="helperTextEnabled">true</item>
+        <item name="errorEnabled">true</item>
+        <item name="helperTextTextAppearance">@font/poppins_regular</item>
+        <item name="errorTextAppearance">@font/poppins_regular</item>
+        <item name="startIconTint">@color/dark_brown</item>
+    </style>
+
+    <style name="ButtonBullets" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">20dp</item>
+        <item name="strokeColor">@color/blue</item>
+        <item name="android:layout_marginHorizontal" tools:targetApi="o">5dp</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+</resources>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white" >
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/dialogSalesChangeStatus_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="Change Transaction Status"
+            app:navigationIcon="@drawable/ic_close"
+            app:titleTextAppearance="@style/DefaultToolbarTitleTextStyle" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Change this sales transaction status to:"
+        tools:ignore="hardcodedText" />
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp">
+        <RadioButton
+            android:id="@+id/dialogSalesChangeStatus_rbWaitingForPayment"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Waiting for Payment"
+            tools:ignore="hardcodedText" />
+        <RadioButton
+            android:id="@+id/dialogSalesChangeStatus_rbWaitingForPickupShipping"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Waiting for Pickup/Shipping"
+            tools:ignore="hardcodedText" />
+        <RadioButton
+            android:id="@+id/dialogSalesChangeStatus_rbDone"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Done"
+            tools:ignore="hardcodedText" />
+    </RadioGroup>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp" >
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogSalesChangeStatus_btnCancel"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            app:cornerRadius="40dp"
+            android:backgroundTint="@color/grey"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:letterSpacing="0"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:text="@string/cancel"
+            tools:ignore="hardcodedText" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogSalesChangeStatus_btnConfirm"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            app:cornerRadius="40dp"
+            android:backgroundTint="@color/green"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:letterSpacing="0"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:text="@string/confirm"
+            tools:ignore="hardcodedText" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="50dp">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:backgroundTint="@color/white" >
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/dialogTransactionSelectedProductList_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="Selected Product List"
+            app:navigationIcon="@drawable/ic_close"
+            app:titleTextAppearance="@style/DefaultToolbarTitleTextStyle" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <TextView
+        android:id="@+id/dialogTransactionSelectedProductList_txtNoItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="No item selected for this transaction."
+        tools:ignore="hardcodedText"
+        android:visibility="gone" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dialogTransactionSelectedProductList_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="10dp" />
+</LinearLayout>

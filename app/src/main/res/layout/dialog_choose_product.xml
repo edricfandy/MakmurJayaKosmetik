@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:backgroundTint="@color/white"
+            android:elevation="8dp" >
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/dialogChooseProduct_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:navigationIcon="@drawable/ic_close"
+                app:title="0 selected"
+                android:fontFamily="@font/poppins_regular" >
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dialogChooseProduct_btnConfirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="DONE"
+                    style="@style/Widget.AppCompat.Button.Borderless" />
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@color/middle_yellow"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="Choose the product you want to add, edit the price or amount."
+            tools:ignore="hardcodedText" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:text="@string/search" />
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+                <EditText
+                    android:id="@+id/dialogChooseProduct_etSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/image_background"
+                    android:inputType="text"
+                    android:paddingHorizontal="10dp"
+                    android:importantForAutofill="no"
+                    tools:ignore="LabelFor" />
+                <ImageView
+                    android:id="@+id/dialogChooseProduct_btnSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/search"
+                    android:src="@drawable/ic_search" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dialogChooseProduct_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="160dp"
+        android:paddingHorizontal="20dp" />
+    <TextView
+        android:id="@+id/dialogChooseProduct_txtNoItemMatches"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="No item matches the search keyword."
+        tools:ignore="hardcodedText"
+        android:visibility="gone" />
+    <LinearLayout
+        android:id="@+id/dialogChooseProduct_layoutEmptyItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:visibility="gone" >
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_empty_box" />
+        <TextView
+            android:id="@+id/dialogChooseProduct_msgEmptyItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginHorizontal="30dp"
+            android:textSize="16sp"
+            android:text="Daftar Produk masih kosong. Segera tambahkan Produk agar dapat melakukan pengelolaan inventory"
+            tools:ignore="hardcodedText" />
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/dialogChooseProduct_fabScanBarcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        app:backgroundTint="@color/blue"
+        android:src="@drawable/ic_barcode" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/dialogChooseProduct_fabOpenList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="90dp"
+        app:backgroundTint="@color/light_blue"
+        android:src="@drawable/ic_list" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/dialogChooseProduct_fabAddProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="160dp"
+        app:backgroundTint="@color/green"
+        android:src="@drawable/ic_add"
+        android:visibility="gone" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

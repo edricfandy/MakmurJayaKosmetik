@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+    <TextView
+        android:id="@+id/dialogConfirmationOperationMany_msgConfirmation1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" />
+    <ListView
+        android:id="@+id/dialogConfirmationOperationMany_listView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="40dp" />
+    <TextView
+        android:id="@+id/dialogConfirmationOperationMany_msgConfirmation2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textSize="16sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogConfirmationOperationMany_btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            app:cornerRadius="20dp"
+            android:backgroundTint="@color/grey"
+            android:letterSpacing="0"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="@string/cancel" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogConfirmationOperationMany_btnConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@color/green"
+            android:text="@string/confirm"
+            android:letterSpacing="0"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:cornerRadius="30dp" />
+    </LinearLayout>
+</LinearLayout>

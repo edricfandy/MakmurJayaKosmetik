@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="30dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true" >
+    <TextView
+        android:id="@+id/dialogAddEditStore_txtHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        android:text="Add Store"
+        tools:ignore="hardcodedText" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:startIconDrawable="@drawable/ic_store"
+            app:startIconTint="@color/dark_brown"
+            app:helperText="*Required"
+            android:hint="@string/platform"
+            style="@style/DefaultExposedDropdownStyle" >
+            <AutoCompleteTextView
+                android:id="@+id/dialogAddEditStore_ddPlatform"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dialogAddEditStore_inputLayoutPlatform"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            app:helperText="*Required"
+            android:hint="Platform Name"
+            style="@style/DefaultEditTextStyle"
+            tools:ignore="hardcodedText"
+            android:visibility="gone" >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialogAddEditStore_etPlatform"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:startIconDrawable="@drawable/ic_tag"
+        app:helperText="*Required"
+        android:hint="@string/store_name"
+        style="@style/DefaultEditTextStyle" >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialogAddEditStore_etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialogAddEditStore_inputLayoutId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:startIconDrawable="@drawable/ic_barcode"
+        android:hint="@string/store_id"
+        style="@style/DefaultEditTextStyle" >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialogAddEditStore_etId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogAddEditStore_btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cornerRadius="20dp"
+            android:paddingVertical="15dp"
+            android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@color/grey"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="@string/cancel" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogAddEditStore_btnConfirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cornerRadius="20dp"
+            android:paddingVertical="15dp"
+            android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@color/green"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="@string/add" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.SalesFragment">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="50dp" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:layout_marginTop="20dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/period" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    app:boxStrokeWidth="0dp"
+                    style="@style/DefaultExposedDropdownStyle" >
+                    <AutoCompleteTextView
+                        android:id="@+id/manageSales_ddDatetime"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/choose_one"
+                        android:gravity="end"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/manageSales_layoutDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:visibility="gone" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/date" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    app:boxStrokeWidth="0dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/manageSales_etDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <ImageButton
+                    android:id="@+id/manageSales_btnChooseDate"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_calendar"
+                    android:background="@drawable/image_background"
+                    android:contentDescription="@string/date"/>
+            </LinearLayout>
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                app:elevation="0dp" >
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none" >
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="10dp">
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/manageSales_btnAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            style="@style/ButtonBullets"
+                            android:text="All"
+                            tools:ignore="hardcodedText" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/manageSales_btnNotPaidYet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            style="@style/ButtonBullets"
+                            android:text="Not Paid Yet"
+                            tools:ignore="hardcodedText" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/manageSales_btnPaid"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            style="@style/ButtonBullets"
+                            android:text="Paid"
+                            tools:ignore="hardcodedText" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/manageSales_btnWaitingForPickupShipping"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            style="@style/ButtonBullets"
+                            android:text="Waiting for Pickup/Shipping"
+                            tools:ignore="hardcodedText" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/manageSales_btnPickedUpShipped"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            style="@style/ButtonBullets"
+                            android:text="Picked up/Shipped"
+                            tools:ignore="hardcodedText" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/manageSales_btnDone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            style="@style/ButtonBullets"
+                            android:text="Done"
+                            tools:ignore="hardcodedText" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/manageSales_btnCanceled"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            style="@style/ButtonBullets"
+                            android:text="Canceled"
+                            tools:ignore="hardcodedText" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </com.google.android.material.appbar.AppBarLayout>
+            <TextView
+                android:id="@+id/manageSales_txtHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="16sp"
+                android:text="Waiting for Payment"
+                tools:ignore="hardcodedText" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/manageSales_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:nestedScrollingEnabled="false" />
+            <LinearLayout
+                android:id="@+id/manageSales_layoutEmptyItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:visibility="gone" >
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_transaction" />
+                <TextView
+                    android:id="@+id/manageSales_msgEmptyItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="30dp"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/manageSales_fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/blue"
+        app:tint="@color/white"
+        android:src="@drawable/ic_add" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

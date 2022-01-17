@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:contentPadding="10dp"
+    app:strokeColor="@color/light_grey"
+    app:strokeWidth="1dp" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/layoutPurchaseView_txtDatetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Mon, 8 November 2021 13:00:00"
+                tools:ignore="hardcodedText" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/layoutPurchaseView_txtSupplierName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:text="Supplier Name"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/layoutPurchaseView_txtSupplierCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginStart="5dp"
+                    app:drawableStartCompat="@drawable/ic_location"
+                    android:textSize="12sp"
+                    android:text="Medan"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/layoutPurchaseView_txtId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="16sp"
+                android:text="SampleRestockID"
+                tools:ignore="hardcodedText" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                <TextView
+                    android:id="@+id/layoutPurchaseView_txtTotalItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/total_item" />
+                <TextView
+                    android:id="@+id/layoutPurchaseView_txtCheckedStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center"
+                    app:drawableStartCompat="@drawable/ic_true"
+                    app:drawableTint="@color/dark_green"
+                    android:textColor="@color/dark_green"
+                    android:textSize="12sp"
+                    android:text="Checked" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/layoutPurchaseView_txtPaymentMethod"
+                style="@style/ButtonBullets"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:clickable="false"
+                android:text="Payment Status"
+                tools:ignore="hardcodedText" />
+
+            <TextView
+                android:id="@+id/layoutPurchaseView_txtTotalPurchase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="end"
+                android:text="Rp 175.000,-"
+                android:textColor="@color/blue"
+                android:textSize="18sp"
+                tools:ignore="hardcodedText" />
+
+            <TextView
+                android:id="@+id/layoutPurchaseView_txtCurrentPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="@string/in_debt_remain"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

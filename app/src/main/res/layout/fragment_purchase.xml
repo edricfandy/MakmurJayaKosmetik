@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.PurchaseFragment">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="50dp" >
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                app:elevation="0dp" >
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none" >
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="10dp">
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/managePurchase_btnAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            style="@style/ButtonBullets"
+                            android:text="All"
+                            tools:ignore="hardcodedText" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/managePurchase_btnCashPurchase"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            style="@style/ButtonBullets"
+                            android:text="Cash Purchase"
+                            tools:ignore="hardcodedText" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/managePurchase_btnCreditPurchase"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            style="@style/ButtonBullets"
+                            android:text="Credit Purchase"
+                            tools:ignore="hardcodedText" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/managePurchase_btnInDebt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            style="@style/ButtonBullets"
+                            android:text="In Debt"
+                            tools:ignore="hardcodedText" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/managePurchase_btnPaidOff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            style="@style/ButtonBullets"
+                            android:text="Paid Off"
+                            tools:ignore="hardcodedText" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/managePurchase_btnCanceled"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            style="@style/ButtonBullets"
+                            android:text="Canceled"
+                            tools:ignore="hardcodedText" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </com.google.android.material.appbar.AppBarLayout>
+            <TextView
+                android:id="@+id/managePurchase_txtHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="16sp"
+                android:text="All Purchases"
+                tools:ignore="hardcodedText" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/managePurchase_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:nestedScrollingEnabled="false" />
+            <LinearLayout
+                android:id="@+id/managePurchase_layoutEmptyItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:visibility="gone" >
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_transaction" />
+                <TextView
+                    android:id="@+id/managePurchase_msgEmptyItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="30dp"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/managePurchase_fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/blue"
+        app:tint="@color/white"
+        android:src="@drawable/ic_add" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

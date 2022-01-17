@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:backgroundTint="@color/white" >
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/dialogAddEditPurchase_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="Manage Purchase"
+            app:navigationIcon="@drawable/ic_close"
+            android:fontFamily="@font/poppins_regular"
+            app:titleTextAppearance="@style/DefaultToolbarTitleTextStyle" >
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialogAddEditPurchase_btnConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/add"
+                style="@style/Widget.AppCompat.Button.Borderless" />
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="50dp" >
+            <TextView
+                android:id="@+id/dialogAddEditPurchase_txtHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textAllCaps="true"
+                android:textColor="@color/dark_brown"
+                android:text="Add Purchase"
+                tools:ignore="hardcodedText" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:startIconDrawable="@drawable/ic_barcode"
+                android:hint="Invoice No."
+                tools:ignore="hardcodedText"
+                style="@style/DefaultEditTextStyle" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialogAddEditPurchase_etId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:startIconDrawable="@drawable/ic_company"
+                android:hint="@string/supplier"
+                style="@style/DefaultAutoCompleteDropdownStyle" >
+                <AutoCompleteTextView
+                    android:id="@+id/dialogAddEditPurchase_ddSupplier"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Choose One"
+                    tools:ignore="hardcodedText" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="center_vertical"
+                    android:text="Payment Method"
+                    tools:ignore="hardcodedText" />
+                <RadioGroup
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="horizontal" >
+                    <RadioButton
+                        android:id="@+id/dialogAddEditPurchase_rbCash"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Cash"
+                        tools:ignore="hardcodedText" />
+                    <RadioButton
+                        android:id="@+id/dialogAddEditPurchase_rbCredit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Credit"
+                        tools:ignore="hardcodedText" />
+                </RadioGroup>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dialogAddEditPurchase_btnCash"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="40dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/light_grey"
+                    android:letterSpacing="0"
+                    android:textColor="@color/grey"
+                    android:text="Cash"
+                    tools:ignore="hardcodedText"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dialogAddEditPurchase_btnCredit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="40dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/light_grey"
+                    android:letterSpacing="0"
+                    android:textColor="@color/grey"
+                    android:text="Credit"
+                    tools:ignore="hardcodedText"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Product List"
+                tools:ignore="hardcodedText" />
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:contentPadding="10dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/grey">
+                <TextView
+                    android:id="@+id/dialogAddEditPurchase_txtNoItems"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginVertical="30dp"
+                    android:text="No Items"
+                    tools:ignore="hardcodedText" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dialogAddEditPurchase_recyclerviewItemList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="gone" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialogAddEditPurchase_btnManageItem"
+                android:layout_width="135dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:drawableLeft="@drawable/ic_add"
+                android:textSize="12sp"
+                android:text="Add Item"
+                tools:ignore="hardcodedText" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:text="Total Item"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/dialogAddEditPurchase_txtTotalItem"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:gravity="end"
+                    android:text="0"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:text="Total Purchase"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/dialogAddEditPurchase_txtTotalPurchase"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:gravity="end"
+                    android:text="0"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Item Checked"
+                    tools:ignore="hardcodedText" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dialogAddEditPurchase_btnItemCheckedStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cornerRadius="10dp"
+                    android:letterSpacing="0"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/red"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="NOT CHECKED"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/dialogAddEditPurchase_layoutPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:startIconDrawable="@drawable/ic_pay"
+                    app:prefixText="IDR"
+                    android:hint="Total Paid"
+                    tools:ignore="hardcodedText"
+                    style="@style/DefaultEditTextStyle" >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/dialogAddEditPurchase_etTotalPaid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:digits="1234567890"
+                        android:inputType="textFilter"
+                        tools:ignore="hardcodedText" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="10dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="6"
+                        android:text="Debt Remaining"
+                        tools:ignore="hardcodedText" />
+                    <TextView
+                        android:id="@+id/dialogAddEditPurchase_txtDebtRemain"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:gravity="end"
+                        android:text="0"
+                        tools:ignore="hardcodedText" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

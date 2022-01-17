@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:backgroundTint="@color/white" >
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/dialogAddEditProduct_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="Manage Product"
+            app:navigationIcon="@drawable/ic_close"
+            app:titleTextAppearance="@style/DefaultToolbarTitleTextStyle" >
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialogAddEditProduct_btnConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/blue"
+                android:text="@string/add"
+                style="@style/Widget.AppCompat.Button.Borderless" />
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="50dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true" >
+            <TextView
+                android:id="@+id/dialogAddEditProduct_txtHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textAllCaps="true"
+                android:textColor="@color/dark_brown"
+                android:text="Add Product"
+                tools:ignore="hardcodedText" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="*All the fields below is required"
+                tools:ignore="hardcodedText" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp" >
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:startIconDrawable="@drawable/ic_barcode"
+                    android:hint="@string/product_id"
+                    style="@style/DefaultEditTextStyle" >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/dialogAddEditProduct_etId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <ImageButton
+                    android:id="@+id/dialogAddEditProduct_btnScanBarcode"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_barcode"
+                    android:background="@drawable/image_background"
+                    android:contentDescription="Barcode Scanner"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:startIconDrawable="@drawable/ic_brand"
+                android:hint="Product Name"
+                style="@style/DefaultEditTextStyle"
+                tools:ignore="hardcodedText" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialogAddEditProduct_etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:startIconDrawable="@drawable/ic_tag"
+                android:hint="@string/category"
+                style="@style/DefaultAutoCompleteDropdownStyle" >
+                <AutoCompleteTextView
+                    android:id="@+id/dialogAddEditProduct_ddCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/choose_one" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:startIconDrawable="@drawable/ic_company"
+                android:hint="@string/supplier"
+                style="@style/DefaultAutoCompleteDropdownStyle" >
+                <AutoCompleteTextView
+                    android:id="@+id/dialogAddEditProduct_ddSupplier"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Choose One"
+                    tools:ignore="hardcodedText" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:startIconDrawable="@drawable/ic_capital_price"
+                app:prefixText="IDR"
+                android:hint="@string/capital_price"
+                style="@style/DefaultEditTextStyle" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialogAddEditProduct_etCapitalPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="1234567890"
+                    android:inputType="textFilter" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:startIconDrawable="@drawable/ic_wholesale"
+                app:prefixText="IDR"
+                android:hint="@string/wholesale_price"
+                style="@style/DefaultEditTextStyle" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialogAddEditProduct_etWholesalePrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="1234567890"
+                    android:inputType="textFilter" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:startIconDrawable="@drawable/ic_sell_price"
+                app:prefixText="IDR"
+                android:hint="@string/retail_price"
+                style="@style/DefaultEditTextStyle" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialogAddEditProduct_etRetailPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="1234567890"
+                    android:inputType="textFilter" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dialogAddEditProduct_layoutEtTotalStock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:startIconDrawable="@drawable/ic_stock"
+                android:hint="@string/total_stock"
+                style="@style/DefaultEditTextStyle" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialogAddEditProduct_etTotalStock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="1234567890"
+                    android:inputType="textFilter" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp" >
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dialogAddEditProduct_btnEnableVariant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:backgroundTint="@color/green"
+                    android:textColor="@color/white"
+                    android:text="Enable Variant"
+                    tools:ignore="hardcodedText" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/dialogAddEditProduct_layoutEtVariantName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    app:startIconDrawable="@drawable/ic_stock"
+                    android:hint="Variant Name"
+                    app:helperText="*Required"
+                    style="@style/DefaultEditTextStyle"
+                    tools:ignore="hardcodedText"
+                    android:visibility="gone" >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/dialogAddEditProduct_etVariantName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/dialogAddEditProduct_layoutVariant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp" >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+                    <TextView
+                        android:id="@+id/dialogAddEditProduct_txtVariantName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:gravity="center"
+                        android:text="Variant"
+                        tools:ignore="hardcodedText" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:gravity="center"
+                        android:text="Amount"
+                        tools:ignore="hardcodedText" />
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dialogAddEditProduct_recyclerViewVariant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dialogAddEditProduct_btnAddVariant"
+                    android:layout_width="135dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:drawableLeft="@drawable/ic_add"
+                    android:textSize="12sp"
+                    android:text="Add Variant"
+                    tools:ignore="hardcodedText" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="10dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="6"
+                        android:text="@string/total_stock" />
+                    <TextView
+                        android:id="@+id/dialogAddEditProduct_txtTotalStock"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:gravity="center"
+                        android:text="0"
+                        tools:ignore="hardcodedText" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/dialogAddEditProduct_layoutImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dialogAddEditProduct_recyclerViewImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/pic_note" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

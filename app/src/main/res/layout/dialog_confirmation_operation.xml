@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="20dp" >
+
+    <!--Layout for store confirmation dialog-->
+    <LinearLayout
+        android:id="@+id/dialogConfirmationOperationStore_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" >
+        <TextView
+            android:id="@+id/dialogConfirmationOperationStore_msgConfirmation1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp" >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/platform" />
+            <TextView
+                android:id="@+id/dialogConfirmationOperationStore_txtPlatform"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|end"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/category_name_sample" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp" >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/store_name" />
+            <TextView
+                android:id="@+id/dialogConfirmationOperationStore_txtName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|end"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="16sp"
+                android:text="@string/category_name_sample" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp" >
+            <TextView
+                android:id="@+id/dialogConfirmationOperationStore_lblId"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:text="@string/store_id" />
+            <TextView
+                android:id="@+id/dialogConfirmationOperationStore_txtId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|end"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/store_id" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/dialogConfirmationOperationStore_layoutAdditional"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp" >
+            <TextView
+                android:id="@+id/dialogConfirmationOperationStore_msgConfirmation2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/platform" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationStore_txtPlatform2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/category_name_sample" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/store_name" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationStore_txtName2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="16sp"
+                    android:text="Store Name"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp" >
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationStore_lblId2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/store_id" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationStore_txtId2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Store Id"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/dialogConfirmationOperationStore_msgConfirmation3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!--Layout for supplier confirmation dialog-->
+    <LinearLayout
+        android:id="@+id/dialogConfirmationOperationSupplier_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" >
+        <TextView
+            android:id="@+id/dialogConfirmationOperationSupplier_msgConfirmation1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp" >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/supplier_id" />
+            <TextView
+                android:id="@+id/dialogConfirmationOperationSupplier_txtId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|end"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Sample Supplier ID"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp" >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/name" />
+            <TextView
+                android:id="@+id/dialogConfirmationOperationSupplier_txtName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|end"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="16sp"
+                android:text="@string/category_name_sample" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp" >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/address" />
+            <TextView
+                android:id="@+id/dialogConfirmationOperationSupplier_txtAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|end"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Store Id"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp" >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/city" />
+            <TextView
+                android:id="@+id/dialogConfirmationOperationSupplier_txtCity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|end"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Store Id"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp" >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/phone_num" />
+            <TextView
+                android:id="@+id/dialogConfirmationOperationSupplier_txtPhoneNum"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|end"
+                android:fontFamily="@font/poppins_regular"
+                android:text="08123457890"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp" >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/email" />
+            <TextView
+                android:id="@+id/dialogConfirmationOperationSupplier_txtEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|end"
+                android:fontFamily="@font/poppins_regular"
+                android:text="email@sample.com"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/dialogConfirmationOperationSupplier_layoutAdditional"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp" >
+            <TextView
+                android:id="@+id/dialogConfirmationOperationSupplier_msgConfirmation2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/supplier_id" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationSupplier_txtId2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Sample Supplier ID"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/name" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationSupplier_txtName2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="16sp"
+                    android:text="@string/category_name_sample" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/address" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationSupplier_txtAddress2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Store Id"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/city" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationSupplier_txtCity2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Store Id"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/phone_num" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationSupplier_txtPhoneNum2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="08123457890"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/email" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationSupplier_txtEmail2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="email@sample.com"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/dialogConfirmationOperationSupplier_msgConfirmation3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!--Layout for category confirmation dialog-->
+    <LinearLayout
+        android:id="@+id/dialogConfirmationOperationCategory_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" >
+        <TextView
+            android:id="@+id/dialogConfirmationOperationCategory_msgConfirmation1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp" >
+            <TextView
+                android:id="@+id/dialogConfirmationOperationCategory_lblName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/category_name" />
+            <TextView
+                android:id="@+id/dialogConfirmationOperationCategory_txtName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center|end"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="16sp"
+                android:text="@string/category_name_sample" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp" >
+            <TextView
+                android:id="@+id/dialogConfirmationOperationCategory_lblDesc"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/description" />
+            <TextView
+                android:id="@+id/dialogConfirmationOperationCategory_txtDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:maxLines="5"
+                android:ellipsize="end"
+                android:gravity="center|end"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Ini merupakan contoh deskripsi dari kategori yang terdaftar dalam aplikasi ini"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/dialogConfirmationOperationCategory_layoutAdditional"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp" >
+            <TextView
+                android:id="@+id/dialogConfirmationOperationCategory_msgConfirmation2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp" >
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationCategory_lblName2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/category_name" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationCategory_txtName2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="16sp"
+                    android:text="@string/category_name_sample" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp" >
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationCategory_lblDesc2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/description" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationCategory_txtDesc2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:maxLines="5"
+                    android:ellipsize="end"
+                    android:gravity="center|end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Ini merupakan contoh deskripsi dari kategori yang terdaftar dalam aplikasi ini"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/dialogConfirmationOperationCategory_msgConfirmation3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:layout_marginVertical="20dp" >
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogConfirmationOperation_btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            app:cornerRadius="20dp"
+            android:backgroundTint="@color/grey"
+            android:letterSpacing="0"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="@string/cancel" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogConfirmationOperation_btnConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@color/green"
+            android:text="@string/confirm"
+            android:letterSpacing="0"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:cornerRadius="30dp" />
+    </LinearLayout>
+</LinearLayout>

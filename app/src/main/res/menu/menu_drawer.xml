@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuDrawer_overview"
+        android:icon="@drawable/ic_overview"
+        android:title="Overview"
+        android:checkable="true" />
+    <group
+        android:id="@+id/menuDrawer_groupTransaction"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menuDrawer_subtitleTransaction"
+            android:title="@string/sales" >
+            <menu>
+                <item
+                    android:id="@+id/menuDrawer_sales"
+                    android:icon="@drawable/ic_sell"
+                    android:title="@string/sales"
+                    android:checkable="true" />
+                <item
+                    android:id="@+id/menuDrawer_purchase"
+                    android:icon="@drawable/ic_warehouse"
+                    android:title="Purchase"
+                    android:checkable="true" />
+                <item
+                    android:id="@+id/menuDrawer_payment"
+                    android:icon="@drawable/ic_pay"
+                    android:title="Payment"
+                    android:checkable="true" />
+            </menu>
+        </item>
+    </group>
+
+    <group
+        android:id="@+id/menuDrawer_groupEntities"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menuDrawer_subtitleEntities"
+            android:title="Entities" >
+            <menu>
+                <item
+                    android:id="@+id/menuDrawer_store"
+                    android:icon="@drawable/ic_store"
+                    android:title="@string/store"
+                    android:checkable="true" />
+                <item
+                    android:id="@+id/menuDrawer_product"
+                    android:icon="@drawable/ic_hanger"
+                    android:title="@string/product"
+                    android:checkable="true" />
+                <item
+                    android:id="@+id/menuDrawer_category"
+                    android:icon="@drawable/ic_tag"
+                    android:title="@string/category"
+                    android:checkable="true" />
+                <item
+                    android:id="@+id/menuDrawer_supplier"
+                    android:icon="@drawable/ic_supplier"
+                    android:title="@string/supplier"
+                    android:checkable="true" />
+            </menu>
+        </item>
+    </group>
+</menu>

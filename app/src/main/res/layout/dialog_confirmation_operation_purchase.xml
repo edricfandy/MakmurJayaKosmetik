@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="20dp">
+    <ScrollView
+        android:id="@+id/dialogConfirmationOperationPurchase_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="80dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="40dp" >
+            <TextView
+                android:id="@+id/dialogConfirmationOperationPurchase_msgConfirmation1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/dialogConfirmationOperationPurchase_txtDatetime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Sun, 23 December 2021 23:51:23"
+                tools:ignore="hardcodedText" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/restock_id" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationPurchase_txtId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="16sp"
+                    android:text="Sample Restock ID"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/supplier" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationPurchase_txtSupplier"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="16sp"
+                    android:text="Sample Supplier"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:text="Item Checked Status"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationPurchase_txtItemCheckedStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="16sp"
+                    android:text="@string/category_name_sample" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Payment Method"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationPurchase_txtPaymentMethod"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="16sp"
+                    android:text="Sample Payment Method"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:text="Total Paid"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationPurchase_txtTotalPaid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="16sp"
+                    android:text="@string/category_name_sample" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/total_item" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationPurchase_txtTotalItem"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="16sp"
+                    android:text="256"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:text="Total Purchase"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationPurchase_txtTotalPurchase"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center|end"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="16sp"
+                    android:text="Rp 452.000,-"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/dialogConfirmationOperationPurchase_layoutAdditional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp" >
+                <TextView
+                    android:id="@+id/dialogConfirmationOperationPurchase_msgConfirmation2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp" >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/restock_id" />
+                    <TextView
+                        android:id="@+id/dialogConfirmationOperationPurchase_txtId2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center|end"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="16sp"
+                        android:text="Sample Restock ID"
+                        tools:ignore="hardcodedText" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp" >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/supplier" />
+                    <TextView
+                        android:id="@+id/dialogConfirmationOperationPurchase_txtSupplier2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center|end"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="16sp"
+                        android:text="Sample Supplier"
+                        tools:ignore="hardcodedText" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="5dp"
+                        android:text="Item Checked Status"
+                        tools:ignore="hardcodedText" />
+                    <TextView
+                        android:id="@+id/dialogConfirmationOperationPurchase_txtItemCheckedStatus2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_gravity="center"
+                        android:gravity="center|end"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="16sp"
+                        android:text="@string/category_name_sample" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp" >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Payment Method"
+                        tools:ignore="hardcodedText" />
+                    <TextView
+                        android:id="@+id/dialogConfirmationOperationPurchase_txtPaymentMethod2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center|end"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="16sp"
+                        android:text="Sample Payment Method"
+                        tools:ignore="hardcodedText" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="5dp"
+                        android:text="Total Paid"
+                        tools:ignore="hardcodedText" />
+                    <TextView
+                        android:id="@+id/dialogConfirmationOperationPurchase_txtTotalPaid2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center|end"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="16sp"
+                        android:text="@string/category_name_sample" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/total_item" />
+                    <TextView
+                        android:id="@+id/dialogConfirmationOperationPurchase_txtTotalItem2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center|end"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="16sp"
+                        android:text="256"
+                        tools:ignore="hardcodedText" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="5dp"
+                        android:text="Total Purchase" />
+                    <TextView
+                        android:id="@+id/dialogConfirmationOperationPurchase_txtTotalPurchase2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center|end"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="16sp"
+                        android:text="IDR 885.000,-"
+                        tools:ignore="hardcodedText" />
+                </LinearLayout>
+            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialogConfirmationOperationPurchase_btnProductList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="70dp"
+                android:layout_marginTop="30dp"
+                app:strokeColor="@color/blue"
+                android:text="See product list"
+                tools:ignore="hardcodedText"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+            <TextView
+                android:id="@+id/dialogConfirmationOperationPurchase_msgConfirmation3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogConfirmationOperationPurchase_btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            app:cornerRadius="20dp"
+            android:backgroundTint="@color/grey"
+            android:letterSpacing="0"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="@string/cancel" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogConfirmationOperationPurchase_btnConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@color/green"
+            android:text="@string/confirm"
+            android:letterSpacing="0"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:cornerRadius="30dp" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

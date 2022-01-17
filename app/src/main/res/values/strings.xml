@@ -1,0 +1,97 @@
+<resources>
+    <string name="app_name">Makmur Jaya Kosmetik</string>
+    <string name="app_type">Point of Sales</string>
+
+    <string name="store">Store</string>
+    <string name="store_id">Store ID</string>
+    <string name="store_id_with_placeholder">Store ID/Username: %1$s</string>
+    <string name="store_name">Store Name</string>
+    <string name="platform">Platform</string>
+    <string name="store_name_and_platform">%1$s (%2$s)</string>
+    <string name="offline_store">Offline Store</string>
+    <string name="facebook">Facebook</string>
+    <string name="instagram">Instagram</string>
+    <string name="whatsapp">WhatsApp</string>
+
+    <string name="supplier">Supplier</string>
+    <string name="supplier_id">Supplier ID</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="address_and_city">%1$s, %2$s</string>
+    <string name="phone_num">Phone Number</string>
+    <string name="email">E-mail Address</string>
+    <string name="supplier_id_name_and_city">%1$s - %2$s (%3$s)</string>
+
+    <string name="sales">Sales</string>
+    <string name="sales_id">Sales ID</string>
+    <string name="order_via">Order via %1$s</string>
+    <string name="type">Type</string>
+    <string name="status">Status</string>
+    <string name="total_item">Total Item</string>
+    <string name="total_price">Total Price</string>
+    <string name="datetime_and_store">%1$s via %2$s</string>
+    <string name="period">Period</string>
+    <string name="date">Date</string>
+    <string name="total_items">%1$s item(s)</string>
+    <string name="cash">Cash</string>
+    <string name="credit">Credit</string>
+    <string name="in_debt_remain">In Debt (Remain: %1$s)</string>
+    <string name="checked">Checked</string>
+    <string name="not_checked">Not Checked</string>
+
+    <string name="restock">Restock</string>
+    <string name="restock_id">Restock ID</string>
+
+    <string name="category">Category</string>
+    <string name="category_name">Category Name</string>
+    <string name="category_name_sample">Daster</string>
+    <string name="stock_amount_sample">256</string>
+    <string name="description">Description</string>
+
+    <string name="product">Product</string>
+    <string name="product_id">Product ID</string>
+    <string name="name">Name</string>
+    <string name="capital_price">Capital price</string>
+    <string name="wholesale_price">Wholesale price</string>
+    <string name="retail_price">Retail price</string>
+    <string name="total_stock">Total Stock</string>
+    <string name="no_pic">No image added.</string>
+    <string name="pic_unavailable">Image unavailable, could be moved or deleted.</string>
+    <string name="pic_note"><b>Note</b>: Image 1 will be the thumbnail of the product in the product list.</string>
+    <string name="variant_name">Variant Name</string>
+    <string name="enable_variant">Enable Variant</string>
+    <string name="disable_variant">Disable Variant</string>
+
+    <string name="add">Add</string>
+    <string name="add_arg">Add %1$s</string>
+    <string name="edit">Edit</string>
+    <string name="edit_arg">Edit %1$s</string>
+    <string name="delete">Delete</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="total_amount">(%1$s)</string>
+    <string name="search">Search</string>
+    <string name="wholesale">(Wholesale: %1$s)</string>
+    <string name="other">Other</string>
+    <string name="choose_one">Choose One</string>
+
+    <string name="add_confirmation_message_arg">You\'re about to add a %1$s with the following information.</string>
+    <string name="add_confirmation_message_arg_2">Confirm to add this %1$s?</string>
+    <string name="edit_confirmation_message_arg">You\'re about to edit a %1$s with the following information: </string>
+    <string name="edit_confirmation_message_arg_2">To this new information of %1$s: </string>
+    <string name="edit_confirmation_message_arg_3">Confirm to edit this %1$s?</string>
+    <string name="delete_confirmation_message_arg">You\'re about to delete a %1$s with the following information.</string>
+    <string name="delete_confirmation_message_arg_2">Confirm to delete this %1$s?</string>
+    <string name="delete_confirmation_message_many_arg">You\'re about to delete %1$s %2$s from the %3$s.</string>
+    <string name="delete_confirmation_message_many_arg_2">Confirm to delete these %1$s? </string>
+    <string name="cancel_confirmation_message_arg">You\'re about to cancel a %1$s transaction with the following information.</string>
+    <string name="cancel_confirmation_message_arg_2">Confirm to cancel this %1$s? Canceled %1$s will be disabled and could not be modified.</string>
+    <string name="item_empty_message">%1$s list still empty. Add %1$s to organize inventory easier.</string>
+    <string name="change_item_checked_status_btn_msg">Change Item Checked Status to "%1$s"</string>
+    <string name="change_item_checked_status_confirmation_message">Are you sure want to change the item checked status to "<b>%1$s</b>"?</string>
+
+
+    <string name="open_navigation_view">Open Navigation View</string>
+    <string name="close_navigation_view">Close Navigation View</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

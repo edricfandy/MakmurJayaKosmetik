@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PurchaseDetailsActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white" >
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/purchaseDetail_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:navigationIcon="@drawable/ic_back"
+            app:titleTextAppearance="@style/DefaultToolbarTitleTextStyle" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:paddingTop="10dp" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="100dp" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal" >
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/purchaseDetail_txtPaymentMethod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:clickable="false"
+                    app:cornerRadius="20dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:letterSpacing="0"
+                    android:text="Payment Method"
+                    tools:ignore="hardcodedText" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/purchaseDetail_txtPaymentStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:clickable="false"
+                    style="@style/ButtonBullets"
+                    app:strokeColor="@color/white"
+                    android:text="Payment Status"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="5dp"
+                android:layout_marginTop="10dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Purchase ID"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/purchaseDetail_txtId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="end"
+                    android:text="SampelPurchaseID"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/supplier" />
+                <TextView
+                    android:id="@+id/purchaseDetail_txtSupplier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end|center_vertical"
+                    android:text="makmurjayakosmetik (Shopee)"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Date and Time"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/purchaseDetail_txtDatetime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="end"
+                    android:text="Sat, 5 December 2021 12:00:00"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/purchaseDetail_txtLastEditPurchase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:gravity="end"
+                android:textStyle="italic"
+                android:textSize="12sp"
+                android:textColor="@color/grey"
+                android:text="Last edited on 4/1/2022 21:23:54"
+                tools:ignore="hardcodedText" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Item List"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/purchaseDetail_txtItemCheckedStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end|center"
+                    app:drawableStartCompat="@drawable/ic_false"
+                    android:drawablePadding="5dp"
+                    android:drawableTint="@color/red"
+                    android:textColor="@color/red"
+                    android:text="Not Checked"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/purchaseDetail_txtLastUpdateItemCheckedStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:gravity="end"
+                android:textStyle="italic"
+                android:textSize="12sp"
+                android:textColor="@color/grey"
+                android:text="Last status updated on 4/1/2022 21:23:54"
+                tools:ignore="hardcodedText" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/purchaseDetail_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:nestedScrollingEnabled="false" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/total_item" />
+                <TextView
+                    android:id="@+id/purchaseDetail_txtTotalItem"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="end"
+                    android:text="20"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:text="Total Purchase"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/purchaseDetail_txtTotalPurchase"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="end"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/blue"
+                    android:text="Rp 175.000,-"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Total Paid"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/purchaseDetail_txtTotalPaid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="end"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/blue"
+                    android:text="Rp 175.000,-"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="5dp" >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Debt Remain"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/purchaseDetail_txtDebtRemain"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="end"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/blue"
+                    android:text="Rp 175.000,-"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/purchaseDetail_btnChangeItemCheckedStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                app:cornerRadius="10dp"
+                android:letterSpacing="0"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:text="Change Item Checked Status to 'Checked'"
+                tools:ignore="hardcodedText" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/purchaseDetail_btnMakePayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                app:cornerRadius="10dp"
+                android:letterSpacing="0"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:text="Make Payment"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="15dp"
+        app:cardCornerRadius="40dp"
+        app:cardElevation="10dp" >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/purchaseDetail_btnEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                app:cornerRadius="40dp"
+                app:icon="@drawable/ic_edit"
+                app:iconSize="20dp"
+                app:iconTint="@color/white"
+                android:backgroundTint="@color/middle_yellow"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:letterSpacing="0"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:text="@string/edit" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/purchaseDetail_btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                app:cornerRadius="40dp"
+                app:icon="@drawable/ic_close"
+                app:iconSize="20dp"
+                app:iconTint="@color/white"
+                android:backgroundTint="@color/red"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:letterSpacing="0"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:text="Cancel Purchase"
+                tools:ignore="hardcodedText" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

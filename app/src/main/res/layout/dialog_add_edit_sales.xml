@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:focusableInTouchMode="true" >
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:backgroundTint="@color/white" >
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/dialogAddEditSales_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="Manage Sales"
+            app:navigationIcon="@drawable/ic_close"
+            app:titleTextAppearance="@style/DefaultToolbarTitleTextStyle" >
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialogAddEditSales_btnConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/blue"
+                android:text="@string/add"
+                style="@style/Widget.AppCompat.Button.Borderless" />
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="50dp" >
+            <TextView
+                android:id="@+id/dialogAddEditSales_txtHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textAllCaps="true"
+                android:textColor="@color/dark_brown"
+                android:text="Add Sales"
+                tools:ignore="hardcodedText" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="*All the fields below is required"
+                tools:ignore="hardcodedText" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:startIconDrawable="@drawable/ic_barcode"
+                android:hint="Sales ID"
+                tools:ignore="hardcodedText"
+                style="@style/DefaultEditTextStyle" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dialogAddEditSales_etId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <CheckBox
+                android:id="@+id/dialogAddEditSales_cbAutoGenId"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:textSize="12sp"
+                android:text="Auto-generate Sales ID"
+                tools:ignore="hardcodedText" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:text="Transaction Type"
+                tools:ignore="hardcodedText" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dialogAddEditSales_btnWholesale"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="40dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/light_grey"
+                    android:letterSpacing="0"
+                    android:textColor="@color/grey"
+                    android:text="Wholesale"
+                    tools:ignore="hardcodedText"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dialogAddEditSales_btnRetail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="40dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/light_grey"
+                    android:letterSpacing="0"
+                    android:textColor="@color/grey"
+                    android:text="Retail"
+                    tools:ignore="hardcodedText"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Order via"
+                    tools:ignore="hardcodedText" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    app:boxStrokeWidth="0dp"
+                    style="@style/DefaultExposedDropdownStyle" >
+                    <AutoCompleteTextView
+                        android:id="@+id/dialogAddEditSales_ddStore"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="end"
+                        android:inputType="none"
+                        android:hint="@string/choose_one" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/dialogAddEditSales_txtNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Note: You can change the 'Payment Status' and 'Item Status' on the Sales Details page by tapping 'CHANGE STATUS' button with the corresponding instance."
+                tools:ignore="hardcodedText"
+                android:visibility="gone" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Product List"
+                tools:ignore="hardcodedText" />
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:contentPadding="10dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/grey">
+                <TextView
+                    android:id="@+id/dialogAddEditSales_txtNoItems"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginVertical="30dp"
+                    android:text="No Items"
+                    tools:ignore="hardcodedText" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dialogAddEditSales_recyclerviewItemList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="gone" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialogAddEditSales_btnManageItem"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:drawableLeft="@drawable/ic_edit"
+                android:textSize="12sp"
+                android:text="Manage Item"
+                tools:ignore="hardcodedText" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/total_item" />
+                <TextView
+                    android:id="@+id/dialogAddEditSales_txtTotalItem"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:text="0"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Total Purchase"
+                    tools:ignore="hardcodedText" />
+                <TextView
+                    android:id="@+id/dialogAddEditSales_txtTotalPurchase"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="@color/blue"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:text="0"
+                    tools:ignore="hardcodedText" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
