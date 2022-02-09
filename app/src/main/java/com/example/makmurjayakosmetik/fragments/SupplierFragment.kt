@@ -11,6 +11,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
 import android.widget.*
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,24 +20,37 @@ import com.example.makmurjayakosmetik.DBHelper
 import com.example.makmurjayakosmetik.R
 import com.example.makmurjayakosmetik.classes.Supplier
 import com.example.makmurjayakosmetik.dialogs.AddEditSupplierDialog
+import com.example.makmurjayakosmetik.dialogs.FilterSupplierModalBottomSheet
 import com.example.makmurjayakosmetik.recyclerview.RVSupplier
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 class SupplierFragment : Fragment() {
     private lateinit var db: DBHelper
 
+    private lateinit var layout : CoordinatorLayout
     private lateinit var etSearch : EditText
+    private lateinit var btnFilter: ImageView
     private lateinit var btnAddItem : MaterialButton
     private lateinit var txtMsgEmptyItem : TextView
     private lateinit var recyclerView: RecyclerView
     private lateinit var hiddenLayout: LinearLayout
     private lateinit var fabAdd : FloatingActionButton
     private lateinit var dialog: AddEditSupplierDialog
+    private lateinit var txtNoItemMatches : TextView
     private var itemSelectedActionMode: ActionMode? = null
+    private lateinit var snackbar : Snackbar
 
     private lateinit var listSupplier: ArrayList<Supplier>
+    private var tempFilteredSupplier : ArrayList<Supplier> = arrayListOf()
     private var filteredSupplier : ArrayList<Supplier> = arrayListOf()
+
+    private lateinit var arrayCity : ArrayList<String>
+    private lateinit var filteredArray: Array<Boolean>
+    private var sortBy = ""
+    private var order = "asc"
+    private var filterSet = false
 
     private val manageSupplierBroadcastReceiver = object : BroadcastReceiver() {
         @SuppressLint("NotifyDataSetChanged")
@@ -77,7 +91,19 @@ class SupplierFragment : Fragment() {
                     dialog.arguments = bundle
                     dialog.show(requireActivity().supportFragmentManager, null)
                 }
-
+            } else if (p1?.action == "FILTER_SUPPLIER") {
+                val filterArray = p1.extras?.getSerializable("FILTER_ARRAY")
+                sortBy = p1.extras?.getString("SORT_BY") ?: ""
+                order = p1.extras?.getString("ORDER") ?: "asc"
+                if (filterArray != null) {
+                    for (i in 0 until (filterArray as Array<*>).size)
+                        filteredArray[i] = filterArray[i] as Boolean
+                    filterSet = true
+                    filterRecyclerView()
+                }
+            } else if (p1?.action == "RESET_FILTER") {
+                filterSet = false
+                updateRecyclerView()
             }
         }
     }
@@ -97,13 +123,19 @@ class SupplierFragment : Fragment() {
             etSearch.text.clear()
             return when(p1?.itemId) {
                 R.id.menuActionMode_selectAll -> {
-                    listSupplier.forEach { it.selected = true }
+                    filteredSupplier.forEach {
+                        it.selected = true
+                        listSupplier.find { sp -> sp.id == it.id }?.selected = true
+                    }
                     itemSelectedActionMode?.title = "${listSupplier.size} selected"
                     recyclerView.adapter?.notifyDataSetChanged()
                     true
                 }
                 R.id.menuActionMode_deselectAll -> {
-                    listSupplier.forEach { it.selected = false }
+                    filteredSupplier.forEach {
+                        it.selected = false
+                        listSupplier.find { sp -> sp.id == it.id }?.selected = false
+                    }
                     itemSelectedActionMode?.title = "0 selected"
                     recyclerView.adapter?.notifyDataSetChanged()
                     true
@@ -160,7 +192,7 @@ class SupplierFragment : Fragment() {
         override fun onDestroyActionMode(p0: ActionMode?) {
             itemSelectedActionMode = null
             listSupplier.forEach { it.selected = false }
-            recyclerView.adapter = RVSupplier(listSupplier, requireActivity())
+            updateRecyclerView()
         }
     }
 
@@ -169,12 +201,17 @@ class SupplierFragment : Fragment() {
         db = DBHelper(requireContext())
 
         listSupplier = db.getAllSuppliers()
+        tempFilteredSupplier.addAll(listSupplier)
         filteredSupplier.addAll(listSupplier)
+        arrayCity = db.getAllCitySupplier()
+        filteredArray = Array(arrayCity.size) { true }
         val intentFilter = IntentFilter()
         intentFilter.addAction("MODIFIED")
         intentFilter.addAction("DELETE_SUPPLIER")
         intentFilter.addAction("SUPPLIER_SELECTED")
         intentFilter.addAction("OPEN_EDIT_SUPPLIER")
+        intentFilter.addAction("FILTER_SUPPLIER")
+        intentFilter.addAction("RESET_FILTER")
         requireContext().registerReceiver(manageSupplierBroadcastReceiver, intentFilter)
     }
 
@@ -184,13 +221,15 @@ class SupplierFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_supplier, container, false)
 
+        layout = view.findViewById(R.id.manageSupplier_mainLayout)
         etSearch = view.findViewById(R.id.manageSupplier_etSearch)
+        btnFilter = view.findViewById(R.id.manageSupplier_btnFilter)
         txtMsgEmptyItem = view.findViewById(R.id.manageSupplier_msgEmptyItem)
         btnAddItem = view.findViewById(R.id.manageSupplier_btnAddItem)
         recyclerView = view.findViewById(R.id.manageSupplier_recyclerView)
         hiddenLayout = view.findViewById(R.id.manageSupplier_layoutEmptyItem)
         fabAdd = view.findViewById(R.id.manageSupplier_fabAdd)
-        val txtNoItemMatches = view.findViewById<TextView>(R.id.manageSupplier_txtNoItemMatches)
+        txtNoItemMatches = view.findViewById(R.id.manageSupplier_txtNoItemMatches)
 
         if (listSupplier.size <= 0) {
             hiddenLayout.visibility = View.VISIBLE
@@ -207,21 +246,29 @@ class SupplierFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (etSearch.text.isNotEmpty()) {
                     filteredSupplier.clear()
-                    filteredSupplier.addAll(listSupplier.filter { it.name.lowercase().contains(etSearch.text.toString().lowercase()) || it.id.lowercase().contains(etSearch.text.toString().lowercase()) })
+                    filteredSupplier.addAll(tempFilteredSupplier.filter { it.name.lowercase().contains(etSearch.text.toString().lowercase()) || it.id.lowercase().contains(etSearch.text.toString().lowercase()) })
                     if (filteredSupplier.isEmpty()) txtNoItemMatches.visibility = View.VISIBLE
                     else txtNoItemMatches.visibility = View.GONE
                     recyclerView.adapter?.notifyDataSetChanged()
                     return
                 }
 
-                filteredSupplier.clear()
-                filteredSupplier.addAll(listSupplier)
-                txtNoItemMatches.visibility = View.GONE
-                recyclerView.adapter?.notifyDataSetChanged()
+                arrangeRecyclerView()
             }
 
             override fun afterTextChanged(p0: Editable?) { }
         })
+
+        btnFilter.setOnClickListener {
+            val bottomSheet = FilterSupplierModalBottomSheet()
+            val bundle = Bundle()
+            bundle.putSerializable("CITIES", arrayCity)
+            bundle.putSerializable("FILTER_ARRAY", filteredArray)
+            bundle.putString("SORT_BY", sortBy)
+            bundle.putString("ORDER", order)
+            bottomSheet.arguments = bundle
+            bottomSheet.show(childFragmentManager.beginTransaction(), "FilterStore")
+        }
 
         recyclerView.apply {
             adapter = RVSupplier(filteredSupplier, requireActivity())
@@ -233,11 +280,20 @@ class SupplierFragment : Fragment() {
         btnAddItem.setOnClickListener {
             val dialog = AddEditSupplierDialog("add")
             dialog.show(childFragmentManager.beginTransaction(), null)
+            updateRecyclerView()
         }
 
         fabAdd.setOnClickListener {
             val dialog = AddEditSupplierDialog("add")
             dialog.show(childFragmentManager.beginTransaction(), null)
+            updateRecyclerView()
+        }
+
+        snackbar = Snackbar.make(layout, "Filter Applied", Snackbar.LENGTH_INDEFINITE)
+        snackbar.setAction("RESET") {
+            updateRecyclerView()
+            filterSet = false
+            snackbar.dismiss()
         }
 
         return view
@@ -248,12 +304,22 @@ class SupplierFragment : Fragment() {
         requireContext().unregisterReceiver(manageSupplierBroadcastReceiver)
     }
 
+    private fun resetFilter() {
+        tempFilteredSupplier.clear()
+        tempFilteredSupplier.addAll(listSupplier)
+        filteredArray = Array(arrayCity.size) { true }
+        sortBy = ""
+        order = "asc"
+        if (snackbar.isShown) snackbar.dismiss()
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     private fun updateRecyclerView() {
         listSupplier.clear()
         listSupplier.addAll(db.getAllSuppliers())
         filteredSupplier.clear()
         filteredSupplier.addAll(listSupplier)
+        resetFilter()
         if (listSupplier.size <= 0) {
             hiddenLayout.visibility = View.VISIBLE
             txtMsgEmptyItem.text = getString(R.string.item_empty_message, "Supplier")
@@ -266,6 +332,36 @@ class SupplierFragment : Fragment() {
             fabAdd.visibility = View.VISIBLE
         }
 
+        recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun filterRecyclerView() {
+        filteredArray.apply {
+            tempFilteredSupplier.clear()
+            if (this.find { b -> !b } == null) tempFilteredSupplier.addAll(listSupplier)
+            else {
+                for (i in indices)
+                    if (this[i]) tempFilteredSupplier.addAll(listSupplier.filter { it.city == arrayCity[i] })
+            }
+        }
+        arrangeRecyclerView()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun arrangeRecyclerView() {
+        filteredSupplier.clear()
+        filteredSupplier.addAll(tempFilteredSupplier.filter { it.name.lowercase().contains(etSearch.text.toString().lowercase()) || it.id.lowercase().contains(etSearch.text.toString().lowercase()) })
+        when (sortBy) {
+            "name" -> filteredSupplier.sortBy { sp -> sp.name.lowercase() }
+            "city" -> filteredSupplier.sortBy { sp -> sp.city.lowercase() }
+        }
+        if (order == "desc") filteredSupplier.reverse()
+
+        if (filteredSupplier.isEmpty()) txtNoItemMatches.visibility = View.VISIBLE
+        else txtNoItemMatches.visibility = View.GONE
+
+        if (filterSet && !snackbar.isShown) snackbar.show()
         recyclerView.adapter?.notifyDataSetChanged()
     }
 }

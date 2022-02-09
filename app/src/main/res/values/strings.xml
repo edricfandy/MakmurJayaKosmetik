@@ -90,6 +90,11 @@
     <string name="change_item_checked_status_btn_msg">Change Item Checked Status to "%1$s"</string>
     <string name="change_item_checked_status_confirmation_message">Are you sure want to change the item checked status to "<b>%1$s</b>"?</string>
 
+    <string name="added_on">Added on %1$s by %2$s</string>
+    <string name="last_edited_on">Last edited on %1$s by %2$s</string>
+    <string name="status_updated_on">Status updated on %1$s by %2$s</string>
+    <string name="deleted_on">Deleted on %1$s by %2$s</string>
+    <string name="canceled_on">Canceled on %1$s by %2$s</string>
 
     <string name="open_navigation_view">Open Navigation View</string>
     <string name="close_navigation_view">Close Navigation View</string>

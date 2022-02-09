@@ -249,7 +249,20 @@ class AddEditProductDialog(private val mode: String) : DialogFragment() {
             if (!hasFocus) {
                 (v as EditText).apply {
                     if (text.isNotEmpty())
-                        setText(numberFormat.format(text.toString().toInt()).toString())
+                        Thread {
+                            var tempText = text.toString()
+                            var i = 0
+                            do {
+                                if (!tempText[i].isDigit()) {
+                                    tempText = tempText.replace(tempText[i].toString(), "")
+                                    continue
+                                }
+                                i++
+                            } while (i < tempText.length)
+                            post {
+                                setText(numberFormat.format(tempText.toInt()).toString())
+                            }
+                        }.start()
                 }
                 return@setOnFocusChangeListener
             }
@@ -264,7 +277,20 @@ class AddEditProductDialog(private val mode: String) : DialogFragment() {
             if (!hasFocus) {
                 (v as EditText).apply {
                     if (text.isNotEmpty())
-                        setText(numberFormat.format(text.toString().toInt()).toString())
+                        Thread {
+                            var tempText = text.toString()
+                            var i = 0
+                            do {
+                                if (!tempText[i].isDigit()) {
+                                    tempText = tempText.replace(tempText[i].toString(), "")
+                                    continue
+                                }
+                                i++
+                            } while (i < tempText.length)
+                            post {
+                                setText(numberFormat.format(tempText.toInt()).toString())
+                            }
+                        }.start()
                 }
                 return@setOnFocusChangeListener
             }
@@ -279,7 +305,20 @@ class AddEditProductDialog(private val mode: String) : DialogFragment() {
             if (!hasFocus) {
                 (v as EditText).apply {
                     if (text.isNotEmpty())
-                        setText(numberFormat.format(text.toString().toInt()).toString())
+                        Thread {
+                            var tempText = text.toString()
+                            var i = 0
+                            do {
+                                if (!tempText[i].isDigit()) {
+                                    tempText = tempText.replace(tempText[i].toString(), "")
+                                    continue
+                                }
+                                i++
+                            } while (i < tempText.length)
+                            post {
+                                setText(numberFormat.format(tempText.toInt()).toString())
+                            }
+                        }.start()
                 }
                 return@setOnFocusChangeListener
             }
@@ -294,7 +333,20 @@ class AddEditProductDialog(private val mode: String) : DialogFragment() {
             if (!hasFocus) {
                 (v as EditText).apply {
                     if (text.isNotEmpty())
-                        setText(numberFormat.format(text.toString().toInt()).toString())
+                        Thread {
+                            var tempText = text.toString()
+                            var i = 0
+                            do {
+                                if (!tempText[i].isDigit()) {
+                                    tempText = tempText.replace(tempText[i].toString(), "")
+                                    continue
+                                }
+                                i++
+                            } while (i < tempText.length)
+                            post {
+                                setText(numberFormat.format(tempText.toInt()).toString())
+                            }
+                        }.start()
                 }
                 return@setOnFocusChangeListener
             }

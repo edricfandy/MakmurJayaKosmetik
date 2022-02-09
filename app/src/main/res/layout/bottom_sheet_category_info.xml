@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -53,6 +54,25 @@
             android:gravity="end"
             android:text="256" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/categoryInfo_txtAddedOn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="15dp"
+        android:textStyle="italic"
+        android:textColor="@color/grey"
+        android:text="@string/added_on"
+        tools:ignore="hardcodedText" />
+    <TextView
+        android:id="@+id/categoryInfo_txtLastEditedOn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textStyle="italic"
+        android:textColor="@color/grey"
+        android:text="@string/last_edited_on"
+        tools:ignore="hardcodedText" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

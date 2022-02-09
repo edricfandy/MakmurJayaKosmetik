@@ -26,10 +26,11 @@
                 android:contentDescription="Drawer Menu"
                 android:src="@drawable/ic_hamburger" />
             <TextView
+                android:id="@+id/mainPage_txtHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/poppins_bold"
                 android:text="@string/app_name" />
             <TextView
                 android:id="@+id/mainPage_txtAvatar"

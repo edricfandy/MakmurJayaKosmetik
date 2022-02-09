@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp"
+    android:paddingHorizontal="20dp"
+    android:paddingBottom="40dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal" >
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogFilterStore_btnReset"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            app:cornerRadius="20dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:backgroundTint="@color/red"
+            android:letterSpacing="0"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:text="Reset Filter"
+            tools:ignore="hardcodedText" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogFilterStore_btnApply"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            app:cornerRadius="20dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:backgroundTint="@color/green"
+            android:letterSpacing="0"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:text="Apply"
+            tools:ignore="hardcodedText" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Platform"
+        tools:ignore="hardcodedText" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+        <CheckBox
+            android:id="@+id/dialogFilterStore_cbAll"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="All"
+            tools:ignore="hardcodedText" />
+        <CheckBox
+            android:id="@+id/dialogFilterStore_cbOfflineStore"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="Offline Store"
+            tools:ignore="hardcodedText" />
+        <CheckBox
+            android:id="@+id/dialogFilterStore_cbFacebook"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="Facebook"
+            tools:ignore="hardcodedText" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        <CheckBox
+            android:id="@+id/dialogFilterStore_cbInstagram"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="Instagram"
+            tools:ignore="hardcodedText" />
+        <CheckBox
+            android:id="@+id/dialogFilterStore_cbWhatsApp"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="WhatsApp"
+            tools:ignore="hardcodedText" />
+        <CheckBox
+            android:id="@+id/dialogFilterStore_cbShopee"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="Shopee"
+            tools:ignore="hardcodedText" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        <CheckBox
+            android:id="@+id/dialogFilterStore_cbTokopedia"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="Tokopedia"
+            tools:ignore="hardcodedText" />
+        <CheckBox
+            android:id="@+id/dialogFilterStore_cbOther"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="Other"
+            tools:ignore="hardcodedText" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Sort by"
+            tools:ignore="hardcodedText" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialogFilterStore_btnName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                app:cornerRadius="20dp"
+                app:strokeColor="@color/grey"
+                android:letterSpacing="0"
+                android:textColor="@color/grey"
+                android:text="Name"
+                tools:ignore="hardcodedText"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialogFilterStore_btnAddressId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginHorizontal="10dp"
+                app:cornerRadius="20dp"
+                app:strokeColor="@color/grey"
+                android:letterSpacing="0"
+                android:textColor="@color/grey"
+                android:text="Address/id"
+                tools:ignore="hardcodedText"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/dialogFilterStore_layoutOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:visibility="gone" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Order"
+            tools:ignore="hardcodedText" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialogFilterStore_btnOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginHorizontal="10dp"
+                app:cornerRadius="20dp"
+                app:backgroundTint="@color/blue"
+                android:letterSpacing="0"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:text="A-Z"
+                tools:ignore="hardcodedText"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

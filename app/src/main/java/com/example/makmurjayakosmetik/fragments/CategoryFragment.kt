@@ -9,8 +9,10 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.*
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,23 +22,36 @@ import com.example.makmurjayakosmetik.DBHelper
 import com.example.makmurjayakosmetik.R
 import com.example.makmurjayakosmetik.classes.Category
 import com.example.makmurjayakosmetik.dialogs.AddEditCategoryModalBottomSheet
+import com.example.makmurjayakosmetik.dialogs.FilterCategoryModalBottomSheet
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 class CategoryFragment : Fragment() {
     private lateinit var db: DBHelper
 
+    private lateinit var layout : CoordinatorLayout
     private lateinit var etSearch : EditText
+    private lateinit var btnFilter : ImageView
     private lateinit var btnAddItem : MaterialButton
     private lateinit var txtMsgEmptyItem : TextView
     private lateinit var recyclerView: RecyclerView
     private lateinit var hiddenLayout: LinearLayout
     private lateinit var fabAdd : FloatingActionButton
+    private lateinit var txtNoItemMatches : TextView
     private lateinit var modalBottomSheet: AddEditCategoryModalBottomSheet
     private var itemSelectedActionMode: ActionMode? = null
+    private lateinit var snackbar : Snackbar
+
+    private val range = arrayOf(0, 0)
+    private var maxAmount = 0
+    private var sortBy = ""
+    private var order = "asc"
+    private var filterSet = false
 
     private lateinit var listCategory: ArrayList<Category>
     private var filteredCategory : ArrayList<Category> = arrayListOf()
+    private var tempFilteredCategory : ArrayList<Category> = arrayListOf()
 
     private val manageCategoryBroadcastReceiver = object : BroadcastReceiver() {
         @SuppressLint("NotifyDataSetChanged")
@@ -64,11 +79,13 @@ class CategoryFragment : Fragment() {
                 if (p1.extras?.get("SELECTED_STATE") as Boolean) {
                     if (itemSelectedActionMode == null)
                         itemSelectedActionMode = activity?.startActionMode(actionModeCallback)
-                    (listCategory.find { it.name == p1.extras?.get("SELECTED_CATEGORY_NAME") as String } as Category).selected = true
+                    filteredCategory.find { it.name == p1.extras?.get("SELECTED_CATEGORY_NAME") as String }?.selected = true
+                    listCategory.find { it.name == p1.extras?.get("SELECTED_CATEGORY_NAME") as String }?.selected = true
                     val selected = listCategory.filter { it.selected }.size
                     itemSelectedActionMode?.title = "$selected selected"
                 } else {
-                    (listCategory.find { it.name == p1.extras?.get("SELECTED_CATEGORY_NAME") as String } as Category).selected = false
+                    filteredCategory.find { it.name == p1.extras?.get("SELECTED_CATEGORY_NAME") as String }?.selected = false
+                    listCategory.find { it.name == p1.extras?.get("SELECTED_CATEGORY_NAME") as String }?.selected = false
                     val selected = listCategory.filter { it.selected }.size
                     if (selected > 0)
                         itemSelectedActionMode?.title = "$selected selected"
@@ -87,6 +104,21 @@ class CategoryFragment : Fragment() {
                     modalBottomSheet.arguments = bundle
                     modalBottomSheet.show(requireActivity().supportFragmentManager, null)
                 }
+            } else if (p1?.action == "FILTER_CATEGORY") {
+                val showRange = p1.extras?.getSerializable("ITEM_AMOUNT_RANGE")
+                if (showRange != null) {
+                    (showRange as Array<*>).apply {
+                        range[0] = (this[0] as Float).toInt()
+                        range[1] = (this[1] as Float).toInt()
+                    }
+                }
+                sortBy = p1.extras?.getString("SORT_BY") ?: ""
+                order = p1.extras?.getString("ORDER") ?: "asc"
+                filterSet = true
+                filterRecyclerView()
+            } else if (p1?.action == "RESET_FILTER") {
+                filterSet = false
+                updateRecyclerView()
             }
         }
     }
@@ -106,13 +138,19 @@ class CategoryFragment : Fragment() {
             etSearch.text.clear()
             return when(p1?.itemId) {
                 R.id.menuActionMode_selectAll -> {
-                    listCategory.forEach { it.selected = true }
+                    filteredCategory.forEach {
+                        it.selected = true
+                        listCategory.find { ct -> ct.name == it.name }?.selected = true
+                    }
                     itemSelectedActionMode?.title = "${listCategory.size} selected"
                     recyclerView.adapter?.notifyDataSetChanged()
                     true
                 }
                 R.id.menuActionMode_deselectAll -> {
-                    listCategory.forEach { it.selected = false }
+                    filteredCategory.forEach {
+                        it.selected = false
+                        listCategory.find { ct -> ct.name == it.name }?.selected = false
+                    }
                     itemSelectedActionMode?.title = "0 selected"
                     recyclerView.adapter?.notifyDataSetChanged()
                     true
@@ -169,7 +207,7 @@ class CategoryFragment : Fragment() {
         override fun onDestroyActionMode(p0: ActionMode?) {
             itemSelectedActionMode = null
             listCategory.forEach { it.selected = false }
-            recyclerView.adapter = RVCategory(listCategory, requireActivity())
+            updateRecyclerView()
         }
     }
 
@@ -180,11 +218,18 @@ class CategoryFragment : Fragment() {
 
         listCategory = db.getAllCategoriesWithAmount()
         filteredCategory.addAll(listCategory)
+
+        listCategory.forEach {
+            if (it.totalProduct > maxAmount) maxAmount = it.totalProduct
+        }
+
         intentFilter.addAction("ADD_CATEGORY")
         intentFilter.addAction("EDIT_CATEGORY")
         intentFilter.addAction("DELETE_CATEGORY")
         intentFilter.addAction("CATEGORY_SELECTED")
         intentFilter.addAction("OPEN_EDIT_CATEGORY")
+        intentFilter.addAction("FILTER_CATEGORY")
+        intentFilter.addAction("RESET_FILTER")
 
         requireContext().registerReceiver(manageCategoryBroadcastReceiver, intentFilter)
     }
@@ -196,13 +241,15 @@ class CategoryFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_category, container, false)
 
+        layout = view.findViewById(R.id.manageCategory_mainLayout)
         etSearch = view.findViewById(R.id.manageCategory_etSearch)
+        btnFilter = view.findViewById(R.id.manageCategory_btnFilter)
         recyclerView = view.findViewById(R.id.manageCategory_recyclerView)
         hiddenLayout = view.findViewById(R.id.manageCategory_layoutEmptyItem)
         txtMsgEmptyItem = view.findViewById(R.id.manageCategory_msgEmptyItem)
         btnAddItem = view.findViewById(R.id.manageCategory_btnAddItem)
         fabAdd = view.findViewById(R.id.manageCategory_fabAdd)
-        val txtNoItemMatches = view.findViewById<TextView>(R.id.manageCategory_txtNoItemMatches)
+        txtNoItemMatches = view.findViewById(R.id.manageCategory_txtNoItemMatches)
 
         if (listCategory.size <= 0) {
             hiddenLayout.visibility = View.VISIBLE
@@ -218,21 +265,28 @@ class CategoryFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (etSearch.text.isNotEmpty()) {
                     filteredCategory.clear()
-                    filteredCategory.addAll(listCategory.filter { it.name.lowercase().contains(etSearch.text.toString().lowercase()) })
+                    filteredCategory.addAll(tempFilteredCategory.filter { it.name.lowercase().contains(etSearch.text.toString().lowercase()) })
                     if (filteredCategory.isEmpty()) txtNoItemMatches.visibility = View.VISIBLE
                     else txtNoItemMatches.visibility = View.GONE
                     recyclerView.adapter?.notifyDataSetChanged()
                     return
                 }
 
-                filteredCategory.clear()
-                filteredCategory.addAll(listCategory)
-                txtNoItemMatches.visibility = View.GONE
-                recyclerView.adapter?.notifyDataSetChanged()
+                arrangeRecyclerView()
             }
 
             override fun afterTextChanged(p0: Editable?) { }
         })
+
+        btnFilter.setOnClickListener {
+            val bottomSheet = FilterCategoryModalBottomSheet()
+            val bundle = Bundle()
+            bundle.putInt("MAX_ITEM_AMOUNT", maxAmount)
+            bundle.putString("SORT_BY", sortBy)
+            bundle.putString("ORDER", order)
+            bottomSheet.arguments = bundle
+            bottomSheet.show(childFragmentManager.beginTransaction(), "FilterCategory")
+        }
 
         recyclerView.apply {
             adapter = RVCategory(filteredCategory, requireActivity())
@@ -244,11 +298,20 @@ class CategoryFragment : Fragment() {
         btnAddItem.setOnClickListener {
             modalBottomSheet = AddEditCategoryModalBottomSheet("add")
             modalBottomSheet.show(requireActivity().supportFragmentManager, null)
+            updateRecyclerView()
         }
 
         fabAdd.setOnClickListener {
             modalBottomSheet = AddEditCategoryModalBottomSheet("add")
             modalBottomSheet.show(requireActivity().supportFragmentManager, null)
+            updateRecyclerView()
+        }
+
+        snackbar = Snackbar.make(layout, "Filter Applied", Snackbar.LENGTH_INDEFINITE)
+        snackbar.setAction("RESET") {
+            updateRecyclerView()
+            filterSet = false
+            snackbar.dismiss()
         }
 
         return view
@@ -259,8 +322,19 @@ class CategoryFragment : Fragment() {
         requireContext().unregisterReceiver(manageCategoryBroadcastReceiver)
     }
 
+    private fun resetFilter() {
+        tempFilteredCategory.clear()
+        tempFilteredCategory.addAll(listCategory)
+        range[0] = 0
+        range[1] = maxAmount
+        sortBy = ""
+        order = ""
+        if (snackbar.isShown) snackbar.dismiss()
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     private fun updateRecyclerView() {
+        resetFilter()
         listCategory.clear()
         listCategory = db.getAllCategoriesWithAmount()
         filteredCategory.clear()
@@ -277,6 +351,31 @@ class CategoryFragment : Fragment() {
             fabAdd.visibility = View.VISIBLE
         }
 
+        recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    private fun filterRecyclerView() {
+        tempFilteredCategory.clear()
+        listCategory.forEach {
+            if (it.totalProduct >= range[0] && it.totalProduct <= range[1]) tempFilteredCategory.add(it)
+        }
+        arrangeRecyclerView()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun arrangeRecyclerView() {
+        filteredCategory.clear()
+        filteredCategory.addAll(tempFilteredCategory.filter { it.name.lowercase().contains(etSearch.text.toString().lowercase()) })
+        when (sortBy) {
+            "name" -> filteredCategory.sortBy { c -> c.name.lowercase() }
+            "item_amount" -> filteredCategory.sortBy { c -> c.totalProduct }
+        }
+        if (order == "desc") filteredCategory.reverse()
+
+        if (filteredCategory.isEmpty()) txtNoItemMatches.visibility = View.VISIBLE
+        else txtNoItemMatches.visibility = View.GONE
+
+        if (filterSet && !snackbar.isShown) snackbar.show()
         recyclerView.adapter?.notifyDataSetChanged()
     }
 }

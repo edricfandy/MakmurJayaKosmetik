@@ -15,7 +15,7 @@ data class Purchase(
     var payment_method: String,
     var total_paid: Int,
     var total_item: Int,
-    var total_purchase: Int,
+    var total_purchase: Int
 ) : Parcelable {
     @IgnoredOnParcel
     var listProduct: ArrayList<Product> = arrayListOf()

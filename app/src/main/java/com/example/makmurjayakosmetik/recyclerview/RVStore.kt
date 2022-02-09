@@ -48,29 +48,38 @@ class RVStore(val list: ArrayList<Store>, val activity: FragmentActivity) : Recy
             when (store.platform) {
                 "Offline Store" -> {
                     txtPlatform.visibility = View.VISIBLE
+                    imgPlatform.visibility = View.GONE
                     txtPlatform.setCompoundDrawablesWithIntrinsicBounds(AppCompatResources.getDrawable(itemView.context, R.drawable.ic_store), null, null, null)
                 }
                 "Facebook" -> {
                     txtPlatform.visibility = View.VISIBLE
+                    imgPlatform.visibility = View.GONE
                     txtPlatform.setCompoundDrawablesWithIntrinsicBounds(AppCompatResources.getDrawable(itemView.context, R.drawable.ic_facebook), null, null, null)
                 }
                 "Instagram" -> {
                     txtPlatform.visibility = View.VISIBLE
+                    imgPlatform.visibility = View.GONE
                     txtPlatform.setCompoundDrawablesWithIntrinsicBounds(AppCompatResources.getDrawable(itemView.context, R.drawable.ic_instagram), null, null, null)
                 }
                 "WhatsApp" -> {
                     txtPlatform.visibility = View.VISIBLE
+                    imgPlatform.visibility = View.GONE
                     txtPlatform.setCompoundDrawablesWithIntrinsicBounds(AppCompatResources.getDrawable(itemView.context, R.drawable.ic_whatsapp), null, null, null)
                 }
                 "Shopee" -> {
                     imgPlatform.visibility = View.VISIBLE
+                    txtPlatform.visibility = View.GONE
                     imgPlatform.setImageResource(R.mipmap.ic_shopee)
                 }
                 "Tokopedia" -> {
                     imgPlatform.visibility = View.VISIBLE
+                    txtPlatform.visibility = View.GONE
                     imgPlatform.setImageResource(R.mipmap.ic_tokopedia)
                 }
-                else -> txtPlatform.visibility = View.VISIBLE
+                else -> {
+                    txtPlatform.visibility = View.VISIBLE
+                    imgPlatform.visibility = View.GONE
+                }
             }
 
             txtName.text = store.name

@@ -15,14 +15,19 @@
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/activity_transaction_details.xml" value="0.209375" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/bottom_sheet_add_edit_category.xml" value="0.209375" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/bottom_sheet_add_edit_store.xml" value="0.209375" />
-        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/bottom_sheet_category_info.xml" value="0.209375" />
-        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/bottom_sheet_store_info.xml" value="0.209375" />
-        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/bottom_sheet_supplier_info.xml" value="0.209375" />
+        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/bottom_sheet_category_info.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/bottom_sheet_filter_category.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/bottom_sheet_filter_product.xml" value="0.209375" />
+        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/bottom_sheet_filter_store.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/bottom_sheet_filter_supplier.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/bottom_sheet_store_info.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/bottom_sheet_supplier_info.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/bottom_sheet_transaction_manage_product.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/dialog_add_edit_product.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/dialog_add_edit_purchase.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/dialog_add_edit_restock.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/dialog_add_edit_sales.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/dialog_add_edit_supplier.xml" value="0.209375" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/dialog_add_edit_transaction.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/dialog_change_password.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/dialog_choose_product.xml" value="0.33" />
@@ -45,8 +50,9 @@
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/fragment_performance.xml" value="0.209375" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/fragment_product.xml" value="0.209375" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/fragment_purchase.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/fragment_return.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/fragment_sales.xml" value="0.33" />
-        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/fragment_store.xml" value="0.209375" />
+        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/fragment_store.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/fragment_supplier.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/fragment_transaction.xml" value="0.209375" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/layout_account_view.xml" value="0.209375" />
@@ -58,6 +64,7 @@
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/layout_product_view_no_picture.xml" value="0.5" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/layout_purchase_view.xml" value="0.5" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/layout_restock_view.xml" value="0.5" />
+        <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/layout_return_view.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/layout_sales_view.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/layout_transaction_view.xml" value="0.5" />
         <entry key="..\:/AndroidProjects/MakmurJayaKosmetik/app/src/main/res/layout/layout_variant_amount_view.xml" value="0.5" />

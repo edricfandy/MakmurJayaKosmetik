@@ -9,6 +9,8 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+        val db = DBHelper(this)
+        db.getAllLog()
         findViewById<CoordinatorLayout>(R.id.splashScreenLayout).animate().setDuration(200).alpha(1f).withEndAction {
             if (AccountSharedPreferences(this).username != "Kosong")
                 startActivity(Intent(this, MainActivity::class.java))

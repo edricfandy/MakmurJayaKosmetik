@@ -105,7 +105,7 @@
                     android:id="@+id/dialogAddEditProduct_ddCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/choose_one" />
+                    tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -118,8 +118,7 @@
                     android:id="@+id/dialogAddEditProduct_ddSupplier"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Choose One"
-                    tools:ignore="hardcodedText" />
+                    tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -133,8 +132,7 @@
                     android:id="@+id/dialogAddEditProduct_etCapitalPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:digits="1234567890"
-                    android:inputType="textFilter" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -148,8 +146,7 @@
                     android:id="@+id/dialogAddEditProduct_etWholesalePrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:digits="1234567890"
-                    android:inputType="textFilter" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -163,8 +160,7 @@
                     android:id="@+id/dialogAddEditProduct_etRetailPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:digits="1234567890"
-                    android:inputType="textFilter" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/dialogAddEditProduct_layoutEtTotalStock"
@@ -178,8 +174,7 @@
                     android:id="@+id/dialogAddEditProduct_etTotalStock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:digits="1234567890"
-                    android:inputType="textFilter" />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
                 android:layout_width="match_parent"

@@ -11,6 +11,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
 import android.widget.*
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,24 +20,36 @@ import com.example.makmurjayakosmetik.DBHelper
 import com.example.makmurjayakosmetik.R
 import com.example.makmurjayakosmetik.classes.Store
 import com.example.makmurjayakosmetik.dialogs.AddEditStoreModalBottomSheet
+import com.example.makmurjayakosmetik.dialogs.FilterStoreModalBottomSheet
 import com.example.makmurjayakosmetik.recyclerview.RVStore
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 class StoreFragment : Fragment() {
     private lateinit var db: DBHelper
 
+    private lateinit var layout : CoordinatorLayout
     private lateinit var etSearch : EditText
+    private lateinit var btnFilter : ImageView
     private lateinit var btnAddItem : MaterialButton
     private lateinit var txtMsgEmptyItem : TextView
     private lateinit var recyclerView: RecyclerView
     private lateinit var hiddenLayout: LinearLayout
+    private lateinit var txtNoItemMatches : TextView
     private lateinit var fabAdd : FloatingActionButton
     private lateinit var modalBottomSheet: AddEditStoreModalBottomSheet
     private var itemSelectedActionMode: ActionMode? = null
 
+    private var filteredArray = arrayOf(true, false, false, false, false, false, false, false)
+    private var sortBy = ""
+    private var order = "asc"
+    private var filterSet = false
+
     private lateinit var listStore: ArrayList<Store>
     private var filteredStore: ArrayList<Store> = arrayListOf()
+    private var tempFilteredStore: ArrayList<Store> = arrayListOf()
+    private lateinit var snackbar: Snackbar
 
     private val manageStoreBroadcastReceiver = object : BroadcastReceiver() {
         @SuppressLint("NotifyDataSetChanged")
@@ -65,10 +78,12 @@ class StoreFragment : Fragment() {
                 if (p1.extras?.getBoolean("SELECTED_STATE") == true) {
                     if (itemSelectedActionMode == null)
                         itemSelectedActionMode = activity?.startActionMode(actionModeCallback)
+                    filteredStore.find { it.name == store?.name && it.id == store.id && it.platform == store.platform }?.selected = true
                     listStore.find { it.name == store?.name && it.id == store.id && it.platform == store.platform }?.selected = true
                     val selected = listStore.filter { it.selected }.size
                     itemSelectedActionMode?.title = "$selected selected"
                 } else {
+                    filteredStore.find { it.name == store?.name && it.id == store.id && it.platform == store.platform }?.selected = true
                     listStore.find { it.name == store?.name && it.id == store.id && it.platform == store.platform }?.selected = false
                     val selected = listStore.filter { it.selected }.size
                     if (selected > 0)
@@ -88,6 +103,19 @@ class StoreFragment : Fragment() {
                     modalBottomSheet.arguments = bundle
                     modalBottomSheet.show(requireActivity().supportFragmentManager, null)
                 }
+            } else if (p1?.action == "FILTER_STORE") {
+                val filterArray = p1.extras?.getSerializable("FILTER_ARRAY")
+                sortBy = p1.extras?.getString("SORT_BY") ?: ""
+                order = p1.extras?.getString("ORDER") ?: "asc"
+                if (filterArray != null) {
+                    for (i in 0 until (filterArray as Array<*>).size)
+                        filteredArray[i] = filterArray[i] as Boolean
+                    filterSet = true
+                    filterRecyclerView()
+                }
+            } else if (p1?.action == "RESET_FILTER") {
+                filterSet = false
+                updateRecyclerView()
             }
         }
     }
@@ -107,13 +135,19 @@ class StoreFragment : Fragment() {
             etSearch.text.clear()
             return when(p1?.itemId) {
                 R.id.menuActionMode_selectAll -> {
-                    listStore.forEach { it.selected = true }
+                    filteredStore.forEach {
+                        it.selected = true
+                        listStore.find { st -> st.name == it.name && st.id == it.id && st.platform == it.platform }?.selected = true
+                    }
                     itemSelectedActionMode?.title = "${listStore.size} selected"
                     recyclerView.adapter?.notifyDataSetChanged()
                     true
                 }
                 R.id.menuActionMode_deselectAll -> {
-                    listStore.forEach { it.selected = false }
+                    filteredStore.forEach {
+                        it.selected = false
+                        listStore.find { st -> st.name == it.name && st.id == it.id && st.platform == it.platform }?.selected = true
+                    }
                     itemSelectedActionMode?.title = "0 selected"
                     recyclerView.adapter?.notifyDataSetChanged()
                     true
@@ -170,7 +204,7 @@ class StoreFragment : Fragment() {
         override fun onDestroyActionMode(p0: ActionMode?) {
             itemSelectedActionMode = null
             listStore.forEach { it.selected = false }
-            recyclerView.adapter = RVStore(listStore, requireActivity())
+            updateRecyclerView()
         }
     }
 
@@ -178,14 +212,16 @@ class StoreFragment : Fragment() {
         super.onCreate(savedInstanceState)
         db = DBHelper(requireContext())
         val intentFilter = IntentFilter()
-
         listStore = db.getAllStore()
         filteredStore.addAll(listStore)
+        tempFilteredStore.addAll(listStore)
         intentFilter.addAction("ADD_STORE")
         intentFilter.addAction("EDIT_STORE")
         intentFilter.addAction("DELETE_STORE")
         intentFilter.addAction("STORE_SELECTED")
         intentFilter.addAction("OPEN_EDIT_STORE")
+        intentFilter.addAction("FILTER_STORE")
+        intentFilter.addAction("RESET_FILTER")
 
         requireContext().registerReceiver(manageStoreBroadcastReceiver, intentFilter)
     }
@@ -197,13 +233,15 @@ class StoreFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_store, container, false)
 
+        layout = view.findViewById(R.id.manageStore_mainLayout)
         etSearch = view.findViewById(R.id.manageStore_etSearch)
+        btnFilter = view.findViewById(R.id.manageStore_btnFilter)
         recyclerView = view.findViewById(R.id.manageStore_recyclerView)
         hiddenLayout = view.findViewById(R.id.manageStore_layoutEmptyItem)
         txtMsgEmptyItem = view.findViewById(R.id.manageStore_msgEmptyItem)
         btnAddItem = view.findViewById(R.id.manageStore_btnAddItem)
         fabAdd = view.findViewById(R.id.manageStore_fabAdd)
-        val txtNoItemMatches = view.findViewById<TextView>(R.id.manageStore_txtNoItemMatches)
+        txtNoItemMatches = view.findViewById(R.id.manageStore_txtNoItemMatches)
 
         if (listStore.size <= 0) {
             hiddenLayout.visibility = View.VISIBLE
@@ -219,21 +257,28 @@ class StoreFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (etSearch.text.isNotEmpty()) {
                     filteredStore.clear()
-                    filteredStore.addAll(listStore.filter { it.name.lowercase().contains(etSearch.text.toString().lowercase()) || it.id.lowercase().contains(etSearch.text.toString().lowercase()) })
+                    filteredStore.addAll(tempFilteredStore.filter { it.name.lowercase().contains(etSearch.text.toString().lowercase()) || it.id.lowercase().contains(etSearch.text.toString().lowercase()) })
                     if (filteredStore.isEmpty()) txtNoItemMatches.visibility = View.VISIBLE
                     else txtNoItemMatches.visibility = View.GONE
                     recyclerView.adapter?.notifyDataSetChanged()
                     return
                 }
 
-                filteredStore.clear()
-                filteredStore.addAll(listStore)
-                txtNoItemMatches.visibility = View.GONE
-                recyclerView.adapter?.notifyDataSetChanged()
+                arrangeRecyclerView()
             }
 
             override fun afterTextChanged(p0: Editable?) { }
         })
+
+        btnFilter.setOnClickListener {
+            val bottomSheet = FilterStoreModalBottomSheet()
+            val bundle = Bundle()
+            bundle.putSerializable("FILTER_ARRAY", filteredArray)
+            bundle.putString("SORT_BY", sortBy)
+            bundle.putString("ORDER", order)
+            bottomSheet.arguments = bundle
+            bottomSheet.show(childFragmentManager.beginTransaction(), "FilterStore")
+        }
 
         recyclerView.apply {
             adapter = RVStore(filteredStore, requireActivity())
@@ -245,11 +290,20 @@ class StoreFragment : Fragment() {
         btnAddItem.setOnClickListener {
             modalBottomSheet = AddEditStoreModalBottomSheet("add")
             modalBottomSheet.show(childFragmentManager.beginTransaction(), null)
+            updateRecyclerView()
         }
 
         fabAdd.setOnClickListener {
             modalBottomSheet = AddEditStoreModalBottomSheet("add")
             modalBottomSheet.show(childFragmentManager.beginTransaction(), null)
+            updateRecyclerView()
+        }
+
+        snackbar = Snackbar.make(layout, "Filter Applied", Snackbar.LENGTH_INDEFINITE)
+        snackbar.setAction("RESET") {
+            updateRecyclerView()
+            filterSet = false
+            snackbar.dismiss()
         }
 
         return view
@@ -260,24 +314,69 @@ class StoreFragment : Fragment() {
         requireContext().unregisterReceiver(manageStoreBroadcastReceiver)
     }
 
+    private fun resetFilter() {
+        tempFilteredStore.clear()
+        tempFilteredStore.addAll(listStore)
+        filteredArray = arrayOf(true, false, false, false, false, false, false, false)
+        sortBy = ""
+        order = "asc"
+        if (snackbar.isShown) snackbar.dismiss()
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     private fun updateRecyclerView() {
         listStore.clear()
         listStore.addAll(db.getAllStore())
         filteredStore.clear()
         filteredStore.addAll(listStore)
+        resetFilter()
         if (listStore.size <= 0) {
             hiddenLayout.visibility = View.VISIBLE
             txtMsgEmptyItem.text = getString(R.string.item_empty_message, "Store")
             btnAddItem.text = getString(R.string.add_arg, "Store")
             recyclerView.visibility = View.GONE
             fabAdd.visibility = View.GONE
-        } else if (listStore.size > 0 && hiddenLayout.visibility == View.VISIBLE) {
+        } else {
             hiddenLayout.visibility = View.GONE
             recyclerView.visibility = View.VISIBLE
             fabAdd.visibility = View.VISIBLE
         }
 
+        recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun filterRecyclerView() {
+        filteredArray.apply {
+            tempFilteredStore.clear()
+            if (this[0]) tempFilteredStore.addAll(listStore)
+            else {
+                if (this[1]) tempFilteredStore.addAll(listStore.filter { it.platform == "Offline Store" })
+                if (this[2]) tempFilteredStore.addAll(listStore.filter { it.platform == "Facebook" })
+                if (this[3]) tempFilteredStore.addAll(listStore.filter { it.platform == "Instagram" })
+                if (this[4]) tempFilteredStore.addAll(listStore.filter { it.platform == "WhatsApp" })
+                if (this[5]) tempFilteredStore.addAll(listStore.filter { it.platform == "Shopee" })
+                if (this[6]) tempFilteredStore.addAll(listStore.filter { it.platform == "Tokopedia" })
+                if (this[7]) tempFilteredStore.addAll(listStore.filter { it.platform != "Offline Store" && it.platform != "Facebook" && it.platform != "Instagram" && it.platform != "WhatsApp" && it.platform != "Shopee" && it.platform != "Tokopedia" })
+            }
+        }
+        arrangeRecyclerView()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun arrangeRecyclerView() {
+        filteredStore.clear()
+        filteredStore.addAll(tempFilteredStore.filter { it.name.lowercase().contains(etSearch.text.toString().lowercase()) || it.id.lowercase().contains(etSearch.text.toString().lowercase()) })
+        when (sortBy) {
+            "name" -> filteredStore.sortBy { st -> st.name.lowercase() }
+            "address_id" -> filteredStore.sortBy { st -> st.id.lowercase() }
+        }
+        if (order == "desc") filteredStore.reverse()
+
+        if (filteredStore.isEmpty()) txtNoItemMatches.visibility = View.VISIBLE
+        else txtNoItemMatches.visibility = View.GONE
+
+        if (filterSet && !snackbar.isShown) snackbar.show()
         recyclerView.adapter?.notifyDataSetChanged()
     }
 }

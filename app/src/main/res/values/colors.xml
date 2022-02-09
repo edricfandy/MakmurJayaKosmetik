@@ -21,4 +21,6 @@
     <color name="red">#FFFF0000</color>
     <color name="blue">#FF48AAF0</color>
     <color name="light_blue">#FF97D2FB</color>
+    <color name="gunmetal">#FF14262E</color>
+    <color name="navy">#FF314649</color>
 </resources>

@@ -141,7 +141,8 @@ object DBEntity {
             const val COLUMN_TABLE_NAME = "table_name"
             const val COLUMN_PRIMARY_KEY = "primary_key"
             const val COLUMN_COMMAND = "command"
-            const val COLUMN_COMMITER = "commiter"
+            const val COLUMN_COMMITTER = "commiter"
+            const val COLUMN_BASE_PRIMARY_KEY = "base_primary_key"
         }
     }
 }

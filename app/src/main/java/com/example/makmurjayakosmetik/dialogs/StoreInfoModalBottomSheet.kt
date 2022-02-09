@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
+import com.example.makmurjayakosmetik.DBEntity
+import com.example.makmurjayakosmetik.DBHelper
 import com.example.makmurjayakosmetik.R
 import com.example.makmurjayakosmetik.classes.Store
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -22,11 +24,14 @@ class StoreInfoModalBottomSheet : BottomSheetDialogFragment() {
     ): View? {
         val view = inflater.inflate(R.layout.bottom_sheet_store_info, container, false)
 
+        val db = DBHelper(requireContext())
         val store = arguments?.getParcelable<Store>("STORE")
 
         val txtPlatform = view.findViewById<TextView>(R.id.storeInfo_txtPlatform)
         val txtName = view.findViewById<TextView>(R.id.storeInfo_txtName)
         val txtId = view.findViewById<TextView>(R.id.storeInfo_txtId)
+        val txtAddedOn = view.findViewById<TextView>(R.id.storeInfo_txtAddedOn)
+        val txtLastEditedOn = view.findViewById<TextView>(R.id.storeInfo_txtLastEditedOn)
         val btnEdit = view.findViewById<MaterialButton>(R.id.storeInfo_btnEdit)
         val btnDelete = view.findViewById<MaterialButton>(R.id.storeInfo_btnDelete)
 
@@ -49,6 +54,15 @@ class StoreInfoModalBottomSheet : BottomSheetDialogFragment() {
                 txtId.setCompoundDrawablesRelativeWithIntrinsicBounds(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_location), null, null, null)
             }
             else -> txtId.text = getString(R.string.store_id_with_placeholder, store?.id)
+        }
+        db.getAllLog()
+
+        val addLog = db.getLog(DBEntity.TableStore.TABLE_NAME, "insert", "${store?.name};${store?.id};${store?.platform}")
+        txtAddedOn.text = addLog
+        txtLastEditedOn.apply {
+            val log = db.getLog(DBEntity.TableStore.TABLE_NAME, "update", "${store?.name};${store?.id};${store?.platform}")
+            if (log.isEmpty()) visibility = View.GONE
+            else text = log
         }
 
         btnEdit.setOnClickListener {

@@ -1,5 +1,6 @@
 package com.example.makmurjayakosmetik
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var db : DBHelper
     private lateinit var drawer : DrawerLayout
     private lateinit var navigationView: NavigationView
+    private lateinit var txtHeader : TextView
     private var account : Account? = null
 
     private val broadcastReceiver = object : BroadcastReceiver() {
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -45,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 
         drawer = findViewById(R.id.mainPage_drawer)
         navigationView = findViewById(R.id.mainPage_navigationView)
+        txtHeader = findViewById(R.id.mainPage_txtHeading)
 
         val txtAvatar = findViewById<TextView>(R.id.mainPage_txtAvatar)
         txtAvatar.text = account?.username?.get(0).toString()
@@ -72,26 +76,32 @@ class MainActivity : AppCompatActivity() {
                 R.id.menuDrawer_sales -> {
                     fragment = SalesFragment()
                     fragTag = "Manage Sales Fragment"
+                    txtHeader.text = "Sales"
                 }
                 R.id.menuDrawer_purchase -> {
                     fragment = PurchaseFragment()
                     fragTag = "Manage Purchase Fragment"
+                    txtHeader.text = "Purchase"
                 }
                 R.id.menuDrawer_product -> {
                     fragment = ProductFragment()
                     fragTag = "Manage Product Fragment"
+                    txtHeader.text = "Product"
                 }
                 R.id.menuDrawer_category -> {
                     fragment = CategoryFragment()
                     fragTag = "Manage Category and Brand Fragment"
+                    txtHeader.text = "Category"
                 }
                 R.id.menuDrawer_store -> {
                     fragment = StoreFragment()
                     fragTag = "Manage Store Fragment"
+                    txtHeader.text = "Store"
                 }
                 R.id.menuDrawer_supplier -> {
                     fragment = SupplierFragment()
                     fragTag = "Manage Supplier Fragment"
+                    txtHeader.text = "Supplier"
                 }
             }
             drawer.closeDrawer(GravityCompat.START)

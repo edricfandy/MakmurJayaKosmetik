@@ -85,7 +85,7 @@ class AddEditSupplierDialog(private val mode: String) : DialogFragment() {
             etName.setText(supplier?.name)
             etAddress.setText(supplier?.address)
             etCity.setText(supplier?.city)
-            etPhoneNum.setText(supplier?.phone_num)
+            etPhoneNum.setText(if (supplier?.phone_num?.isNotEmpty() == true) supplier!!.phone_num.substring(supplier!!.phone_num.indexOf(')') + 1) else "")
             etEmail.setText(supplier?.email)
             btnConfirm.text = getString(R.string.edit)
         }
@@ -156,7 +156,7 @@ class AddEditSupplierDialog(private val mode: String) : DialogFragment() {
                     return@setOnClickListener
                 }
 
-                val phoneNum = if (etPhoneNum.text.isNotEmpty()) "(+62)-" + etPhoneNum.text.toString() else ""
+                val phoneNum = if (etPhoneNum.text.isNotEmpty()) "(+62)" + etPhoneNum.text.toString() else ""
                 val newSupplier = Supplier(etId.text.toString(), etName.text.toString(), etAddress.text.toString(), etCity.text.toString(), phoneNum, etEmail.text.toString())
                 layoutConfirmation.apply {
                     findViewById<LinearLayout>(R.id.dialogConfirmationOperationSupplier_layout).visibility = View.VISIBLE
@@ -185,8 +185,9 @@ class AddEditSupplierDialog(private val mode: String) : DialogFragment() {
                     }
                 }
             } else if (mode == "edit") {
+                val phoneNum = if (etPhoneNum.text.isNotEmpty()) "(+62)" + etPhoneNum.text.toString() else ""
                 if (etId.text.toString() == supplier?.id && etName.text.toString() == supplier?.name && etAddress.text.toString() == supplier?.address
-                    && supplier?.phone_num == "(+62)-${etPhoneNum.text}" && etEmail.text.toString() == supplier?.email) {
+                    && supplier?.phone_num == phoneNum && etEmail.text.toString() == supplier?.email) {
                     dismiss()
                     return@setOnClickListener
                 }
@@ -204,7 +205,7 @@ class AddEditSupplierDialog(private val mode: String) : DialogFragment() {
                     return@setOnClickListener
                 }
 
-                val newSupplier = Supplier(etId.text.toString(), etName.text.toString(), etAddress.text.toString(), etCity.text.toString(), "(+62)-${etPhoneNum.text}", etEmail.text.toString())
+                val newSupplier = Supplier(etId.text.toString(), etName.text.toString(), etAddress.text.toString(), etCity.text.toString(), phoneNum, etEmail.text.toString())
                 layoutConfirmation.apply {
                     findViewById<LinearLayout>(R.id.dialogConfirmationOperationSupplier_layout).visibility = View.VISIBLE
                     findViewById<TextView>(R.id.dialogConfirmationOperationSupplier_msgConfirmation1).text = getString(

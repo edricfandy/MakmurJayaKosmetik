@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.example.makmurjayakosmetik.classes.*
 import java.lang.Exception
 import java.math.BigInteger
@@ -13,11 +14,17 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DBHelper(private val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object {
         const val DATABASE_NAME = "MakmurJayaKosmetik.db"
         const val DATABASE_VERSION = 1
         val dateFormatter = SimpleDateFormat("yyyyMMddHHmmss", Locale("in", "ID"))
+        val dateFormat = SimpleDateFormat("EE, dd MMM yyyy HH:mm:ss", Locale("in", "ID"))
+    }
+
+    init {
+        val readDb = readableDatabase
+        val writeDb = writableDatabase
     }
 
     override fun onCreate(p0: SQLiteDatabase?) {
@@ -135,8 +142,10 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                 "${DBEntity.TableLog.COLUMN_ID} text not null," +
                 "${DBEntity.TableLog.COLUMN_DATETIME} text not null," +
                 "${DBEntity.TableLog.COLUMN_TABLE_NAME} text not null," +
+                "${DBEntity.TableLog.COLUMN_PRIMARY_KEY} text not null," +
                 "${DBEntity.TableLog.COLUMN_COMMAND} text not null," +
-                "${DBEntity.TableLog.COLUMN_COMMITER} text not null," +
+                "${DBEntity.TableLog.COLUMN_COMMITTER} text not null," +
+                "${DBEntity.TableLog.COLUMN_BASE_PRIMARY_KEY} text not null," +
                 "primary key (${DBEntity.TableLog.COLUMN_ID})" +
                 ")"
 
@@ -190,6 +199,9 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
+        p0?.execSQL("alter table ${DBEntity.TableLog.TABLE_NAME} add column ${DBEntity.TableLog.COLUMN_BASE_PRIMARY_KEY} text")
+        p0?.execSQL("update ${DBEntity.TableLog.TABLE_NAME} set ${DBEntity.TableLog.COLUMN_BASE_PRIMARY_KEY} = 'testing'")
+
         p0?.execSQL("drop table if exists ${DBEntity.TableAccount.TABLE_NAME}")
         p0?.execSQL("drop table if exists ${DBEntity.TableStore.TABLE_NAME}")
         p0?.execSQL("drop table if exists ${DBEntity.TableSupplier.TABLE_NAME}")
@@ -199,6 +211,103 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         p0?.execSQL("drop table if exists ${DBEntity.TableSalesDetails.TABLE_NAME}")
         p0?.execSQL("drop table if exists ${DBEntity.TablePurchase.TABLE_NAME}")
         p0?.execSQL("drop table if exists ${DBEntity.TablePurchaseDetails.TABLE_NAME}")
+    }
+
+    fun getLog(table_name: String, command: String, primary_key: String): String {
+        var log = ""
+        val cursor = readableDatabase.query(
+            DBEntity.TableLog.TABLE_NAME,
+            null,
+            "${DBEntity.TableLog.COLUMN_TABLE_NAME} = ? and ${DBEntity.TableLog.COLUMN_COMMAND} = ? and ${DBEntity.TableLog.COLUMN_PRIMARY_KEY} = ?",
+            arrayOf(table_name, command, primary_key),
+            null,
+            null,
+            "${DBEntity.TableLog.COLUMN_DATETIME} desc",
+            "1"
+        )
+
+        if (cursor.count > 0) {
+            cursor.moveToFirst()
+            log = when (command) {
+                "insert" -> context.getString(R.string.added_on, dateFormat.format(dateFormatter.parse(cursor.getString(1)) ?: Date()), getAccountByUsername(cursor.getString(5))?.name)
+                "update" -> context.getString(R.string.last_edited_on, dateFormat.format(dateFormatter.parse(cursor.getString(1)) ?: Date()), getAccountByUsername(cursor.getString(5))?.name)
+                "delete" -> context.getString(R.string.deleted_on, dateFormat.format(dateFormatter.parse(cursor.getString(1)) ?: Date()), getAccountByUsername(cursor.getString(5))?.name)
+                "cancel" -> context.getString(R.string.canceled_on, dateFormat.format(dateFormatter.parse(cursor.getString(1)) ?: Date()), getAccountByUsername(cursor.getString(5))?.name)
+                else -> context.getString(R.string.status_updated_on, dateFormat.format(dateFormatter.parse(cursor.getString(1)) ?: Date()), getAccountByUsername(cursor.getString(5))?.name)
+            }
+        } else {
+            var base = ""
+            val cursor2 = readableDatabase.query(
+                DBEntity.TableLog.TABLE_NAME,
+                arrayOf(DBEntity.TableLog.COLUMN_BASE_PRIMARY_KEY),
+                "${DBEntity.TableLog.COLUMN_TABLE_NAME} = ? and ${DBEntity.TableLog.COLUMN_PRIMARY_KEY} = ?",
+                arrayOf(DBEntity.TableStore.TABLE_NAME, primary_key),
+                null,
+                null,
+                null,
+                "1"
+            )
+            if (cursor2.count > 0) {
+                cursor2.moveToFirst()
+                base = cursor2.getString(0)
+            }
+            cursor2.close()
+            val cursor3 = readableDatabase.query(
+                DBEntity.TableLog.TABLE_NAME,
+                null,
+                "${DBEntity.TableLog.COLUMN_TABLE_NAME} = ? and ${DBEntity.TableLog.COLUMN_COMMAND} = ? and ${DBEntity.TableLog.COLUMN_PRIMARY_KEY} = ?",
+                arrayOf(DBEntity.TableStore.TABLE_NAME, command, base),
+                null,
+                null,
+                null,
+                "1"
+            )
+            if (cursor3.count > 0) {
+                cursor3.moveToFirst()
+                log = when (command) {
+                    "insert" -> context.getString(R.string.added_on, dateFormat.format(dateFormatter.parse(cursor3.getString(1)) ?: Date()), getAccountByUsername(cursor3.getString(5))?.name)
+                    "update" -> context.getString(R.string.last_edited_on, dateFormat.format(dateFormatter.parse(cursor3.getString(1)) ?: Date()), getAccountByUsername(cursor3.getString(5))?.name)
+                    "delete" -> context.getString(R.string.deleted_on, dateFormat.format(dateFormatter.parse(cursor3.getString(1)) ?: Date()), getAccountByUsername(cursor3.getString(5))?.name)
+                    "cancel" -> context.getString(R.string.canceled_on, dateFormat.format(dateFormatter.parse(cursor3.getString(1)) ?: Date()), getAccountByUsername(cursor3.getString(5))?.name)
+                    else -> context.getString(R.string.status_updated_on, dateFormat.format(dateFormatter.parse(cursor3.getString(1)) ?: Date()), getAccountByUsername(cursor3.getString(5))?.name)
+                }
+            }
+            cursor3.close()
+        }
+
+        cursor.close()
+        return log
+    }
+
+    fun getAllLog() {
+        var log: String
+        val cursor = readableDatabase.query(
+            DBEntity.TableLog.TABLE_NAME,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "${DBEntity.TableLog.COLUMN_DATETIME} desc",
+        )
+        if (cursor.count > 0) {
+            Log.e("total_count", cursor.count.toString())
+            with(cursor) {
+                moveToFirst()
+                do {
+                    log = when (getString(4)) {
+                        "insert" -> context.getString(R.string.added_on, dateFormat.format(dateFormatter.parse(getString(1)) ?: Date()), getAccountByUsername(getString(5))?.name)
+                        "update" -> context.getString(R.string.last_edited_on, dateFormat.format(dateFormatter.parse(getString(1)) ?: Date()), getAccountByUsername(getString(5))?.name)
+                        "delete" -> context.getString(R.string.deleted_on, dateFormat.format(dateFormatter.parse(getString(1)) ?: Date()), getAccountByUsername(getString(5))?.name)
+                        "cancel" -> context.getString(R.string.canceled_on, dateFormat.format(dateFormatter.parse(getString(1)) ?: Date()), getAccountByUsername(getString(5))?.name)
+                        else -> context.getString(R.string.status_updated_on, dateFormat.format(dateFormatter.parse(getString(1)) ?: Date()), getAccountByUsername(getString(5))?.name)
+                    }
+                    Log.e("log", log)
+                } while (moveToNext())
+            }
+
+        }
+        cursor.close()
     }
 
     fun checkAdminAccount() {
@@ -418,6 +527,17 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             put(DBEntity.TableStore.COLUMN_PLATFORM, store.platform)
         }
         writableDatabase.insert(DBEntity.TableStore.TABLE_NAME, null, contentValues)
+
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableStore.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, "${store.name};${store.id};${store.platform}")
+            put(DBEntity.TableLog.COLUMN_COMMAND, "insert")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+            put(DBEntity.TableLog.COLUMN_BASE_PRIMARY_KEY, "${store.name};${store.id};${store.platform}")
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun updateStore(oldStore: Store, newStore: Store) {
@@ -428,10 +548,65 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         }
         writableDatabase.update(DBEntity.TableStore.TABLE_NAME, contentValues,
             "${DBEntity.TableStore.COLUMN_NAME} = ? and ${DBEntity.TableStore.COLUMN_ID} = ? and ${DBEntity.TableStore.COLUMN_PLATFORM} = ?", arrayOf(oldStore.name, oldStore.id, oldStore.platform))
+
+        var base = ""
+        val cursor = readableDatabase.query(
+            DBEntity.TableLog.TABLE_NAME,
+            arrayOf(DBEntity.TableLog.COLUMN_BASE_PRIMARY_KEY),
+            "${DBEntity.TableLog.COLUMN_TABLE_NAME} = ? and ${DBEntity.TableLog.COLUMN_PRIMARY_KEY} = ?",
+            arrayOf(DBEntity.TableStore.TABLE_NAME, "${oldStore.name};${oldStore.id};${oldStore.platform}"),
+            null,
+            null,
+            null,
+            "1"
+        )
+        if (cursor.count > 0) {
+            cursor.moveToFirst()
+            base = cursor.getString(0)
+        }
+        cursor.close()
+
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableStore.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, "${newStore.name};${newStore.id};${newStore.platform}")
+            put(DBEntity.TableLog.COLUMN_COMMAND, "update")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+            put(DBEntity.TableLog.COLUMN_BASE_PRIMARY_KEY, base)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun deleteStore(store: Store) {
         writableDatabase.delete(DBEntity.TableStore.TABLE_NAME, "${DBEntity.TableStore.COLUMN_NAME} = ? and ${DBEntity.TableStore.COLUMN_ID} = ? and ${DBEntity.TableStore.COLUMN_PLATFORM} = ?", arrayOf(store.name, store.id, store.platform))
+        var base = ""
+        val cursor = readableDatabase.query(
+            DBEntity.TableLog.TABLE_NAME,
+            arrayOf(DBEntity.TableLog.COLUMN_BASE_PRIMARY_KEY),
+            "${DBEntity.TableLog.COLUMN_TABLE_NAME} = ? and ${DBEntity.TableLog.COLUMN_PRIMARY_KEY} = ?",
+            arrayOf(DBEntity.TableStore.TABLE_NAME, "${store.name};${store.id};${store.platform}"),
+            null,
+            null,
+            null,
+            "1"
+        )
+        if (cursor.count > 0) {
+            cursor.moveToFirst()
+            base = cursor.getString(0)
+        }
+        cursor.close()
+
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableStore.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, "${store.name};${store.id};${store.platform}")
+            put(DBEntity.TableLog.COLUMN_COMMAND, "delete")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+            put(DBEntity.TableLog.COLUMN_BASE_PRIMARY_KEY, base)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun getAllSuppliers() : ArrayList<Supplier> {
@@ -488,6 +663,40 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         return supplier
     }
 
+    fun getAllCitySupplier() : ArrayList<String> {
+        val cities = arrayListOf<String>()
+        try {
+            readableDatabase.beginTransaction()
+            val cursor = readableDatabase.query(
+                true,
+                DBEntity.TableSupplier.TABLE_NAME,
+                arrayOf(DBEntity.TableSupplier.COLUMN_CITY),
+                null,
+                null,
+                DBEntity.TableSupplier.COLUMN_CITY,
+                null,
+                "${DBEntity.TableSupplier.COLUMN_CITY} asc",
+                null
+            )
+
+            if (cursor.count > 0)
+                with (cursor) {
+                    moveToFirst()
+                    do {
+                        cities.add(getString(0))
+                    } while (cursor.moveToNext())
+                }
+
+            cursor.close()
+            readableDatabase.setTransactionSuccessful()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            readableDatabase.endTransaction()
+        }
+        return cities
+    }
+
     fun checkSupplierIsExisted(id: String) : Boolean {
         val cursor = readableDatabase.query(
             DBEntity.TableSupplier.TABLE_NAME,
@@ -504,13 +713,13 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
     }
 
     fun generateSupplierId() : String {
-        var id = dateFormatter.format(Date()).substring(0, 4) + "01"
+        var id = dateFormatter.format(Date()).substring(2, 6) + "01"
 
         val cursor = readableDatabase.query(
-            DBEntity.TableSales.TABLE_NAME,
-            arrayOf(DBEntity.TableSales.COLUMN_ID),
-            "${DBEntity.TableSales.COLUMN_DATETIME} = ?",
-            arrayOf(dateFormatter.format(Date()).substring(0, 4) + "%"),
+            DBEntity.TableSupplier.TABLE_NAME,
+            arrayOf(DBEntity.TableSupplier.COLUMN_ID),
+            "${DBEntity.TableSupplier.COLUMN_ID} like ?",
+            arrayOf(dateFormatter.format(Date()).substring(2, 6) + "%"),
             null,
             null,
             "${DBEntity.TableSales.COLUMN_ID} desc",
@@ -519,8 +728,9 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         if (cursor.count > 0) {
             cursor.moveToFirst()
-            var lastId = cursor.getInt(0)
+            var lastId = cursor.getString(0).substring(4).toInt()
             id = id.substring(0, 4) + (++lastId).toString().padStart(2, '0')
+            Log.e("lastId", lastId.toString())
         }
 
         cursor.close()
@@ -538,6 +748,16 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         }
 
         writableDatabase.insert(DBEntity.TableSupplier.TABLE_NAME, null, contentValues)
+
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableSupplier.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, supplier.id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "insert")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun updateSupplier(id: String, supplier: Supplier) {
@@ -551,10 +771,29 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         }
 
         writableDatabase.update(DBEntity.TableSupplier.TABLE_NAME, contentValues, "${DBEntity.TableSupplier.COLUMN_ID} = ?", arrayOf(id))
+
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableSupplier.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, supplier.id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "update")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun deleteSupplier(id: String) {
         writableDatabase.delete(DBEntity.TableSupplier.TABLE_NAME, "${DBEntity.TableSupplier.COLUMN_ID} = ?", arrayOf(id))
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableSupplier.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "delete")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun getAllCategories() : ArrayList<Category> {
@@ -611,6 +850,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                         val category = Category(getString(0), getString(1))
                         val cursorTotalProduct = readableDatabase.rawQuery("select count(*) from ${DBEntity.TableProduct.TABLE_NAME} where ${DBEntity.TableProduct.COLUMN_CATEGORY_NAME} = ?", arrayOf(category.name))
                         cursorTotalProduct.moveToFirst()
+                        category.totalProduct = cursorTotalProduct.getInt(0)
                         cursorTotalProduct.close()
                         categories.add(category)
                     } while (cursor.moveToNext())
@@ -669,6 +909,16 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         }
 
         writableDatabase.insert(DBEntity.TableCategory.TABLE_NAME, null, contentValues)
+
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableCategory.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, category.name)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "insert")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun updateCategory(name: String, category: Category) {
@@ -678,10 +928,29 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         }
 
         writableDatabase.update(DBEntity.TableCategory.TABLE_NAME, contentValues, "${DBEntity.TableCategory.COLUMN_NAME} = ?", arrayOf(name))
+
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableCategory.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, category.name)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "update")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun deleteCategory(name: String) {
         writableDatabase.delete(DBEntity.TableCategory.TABLE_NAME, "${DBEntity.TableCategory.COLUMN_NAME} = ?", arrayOf(name))
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableCategory.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, name)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "delete")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun getAllProducts() : ArrayList<Product> {
@@ -827,6 +1096,16 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             put(DBEntity.TableProduct.COLUMN_IMAGES, stringImages)
         }
         writableDatabase.insert(DBEntity.TableProduct.TABLE_NAME, null, contentValues)
+
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableProduct.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, product.id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "insert")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun updateProduct(id: String, product: Product) {
@@ -854,10 +1133,29 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
             put(DBEntity.TableProduct.COLUMN_IMAGES, stringImages)
         }
         writableDatabase.update(DBEntity.TableProduct.TABLE_NAME, contentValues, "${DBEntity.TableProduct.COLUMN_ID} = ?", arrayOf(id))
+
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableProduct.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, product.id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "update")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun deleteProduct(id: String) {
         writableDatabase.delete(DBEntity.TableProduct.TABLE_NAME, "${DBEntity.TableProduct.COLUMN_ID} = ?", arrayOf(id))
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableProduct.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "delete")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun getAllSales() : ArrayList<Sales> {
@@ -976,13 +1274,13 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
     }
 
     fun generateSalesId() : String {
-        var id = dateFormatter.format(Date()).substring(0, 6) + "0001"
+        var id = dateFormatter.format(Date()).substring(2, 8) + "0001"
 
         val cursor = readableDatabase.query(
             DBEntity.TableSales.TABLE_NAME,
             arrayOf(DBEntity.TableSales.COLUMN_ID),
-            "${DBEntity.TableSales.COLUMN_DATETIME} = ?",
-            arrayOf(dateFormatter.format(Date()).substring(0, 6) + "%"),
+            "${DBEntity.TableSales.COLUMN_ID} like ?",
+            arrayOf(dateFormatter.format(Date()).substring(2, 8) + "%"),
             null,
             null,
             "${DBEntity.TableSales.COLUMN_ID} desc",
@@ -991,7 +1289,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         if (cursor.count > 0) {
             cursor.moveToFirst()
-            var lastId = cursor.getInt(0)
+            var lastId = cursor.getString(0).substring(6).toInt()
             id = id.substring(0, 6) + (++lastId).toString().padStart(4, '0')
         }
 
@@ -1064,14 +1362,42 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         sales.listProduct.forEach {
             insertSalesDetails(sales.id, it)
         }
+
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableSales.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, sales.id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "insert")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun updateSalesPaymentStatus(id: String, newStatus: String) {
         writableDatabase.execSQL("update ${DBEntity.TableSales.TABLE_NAME} set ${DBEntity.TableSales.COLUMN_PAYMENT_STATUS} = '$newStatus' where ${DBEntity.TableSales.COLUMN_ID} = ?", arrayOf(id))
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableSales.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "change_status_payment")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun updateSalesItemStatus(id: String, newStatus:String) {
         writableDatabase.execSQL("update ${DBEntity.TableSales.TABLE_NAME} set ${DBEntity.TableSales.COLUMN_ITEM_STATUS} = '$newStatus' where ${DBEntity.TableSales.COLUMN_ID} = ?", arrayOf(id))
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableSales.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "change_status_item")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun updateSales(id: String, sales: Sales) {
@@ -1093,14 +1419,33 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         sales.listProduct.forEach {
             insertSalesDetails(sales.id, it)
         }
+
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableSales.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, sales.id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "update")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun cancelSales(id: String) {
         deleteSalesDetails(id)
         writableDatabase.execSQL("update ${DBEntity.TableSales.TABLE_NAME} set ${DBEntity.TableSales.COLUMN_PAYMENT_STATUS} = 'canceled', ${DBEntity.TableSales.COLUMN_ITEM_STATUS} = 'canceled' where ${DBEntity.TableSales.COLUMN_ID} = ?", arrayOf(id))
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TableSales.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "cancel")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
-    fun insertSalesDetails(trans_id: String, product: Product) {
+    private fun insertSalesDetails(trans_id: String, product: Product) {
         var stringVariants = ""
         var stringVariantsRemain = ""
         for (i in product.variants) {
@@ -1121,7 +1466,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         writableDatabase.insert(DBEntity.TableSalesDetails.TABLE_NAME, null, contentValues)
     }
 
-    fun deleteSalesDetails(trans_id: String) {
+    private fun deleteSalesDetails(trans_id: String) {
         val productList = getSalesDetailsById(trans_id)
         productList.forEach {
             var stringVariantsRemain = ""
@@ -1309,10 +1654,29 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         purchase.listProduct.forEach {
             insertPurchaseDetails(purchase.id, it)
         }
+
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TablePurchase.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, purchase.id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "insert")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun updatePurchaseItemCheckedStatus(id: String, newStatus: String) {
         writableDatabase.execSQL("update ${DBEntity.TablePurchase.TABLE_NAME} set ${DBEntity.TablePurchase.COLUMN_ITEM_CHECKED_STATUS} = '$newStatus' where ${DBEntity.TablePurchase.COLUMN_ID} = ?", arrayOf(id))
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TablePurchase.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "change_status_item_checked")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun updatePurchase(id: String, purchase: Purchase) {
@@ -1332,6 +1696,16 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         purchase.listProduct.forEach {
             insertPurchaseDetails(purchase.id, it)
         }
+
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TablePurchase.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, purchase.id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "update")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun cancelPurchase(id: String) {
@@ -1339,6 +1713,15 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         writableDatabase.execSQL("update ${DBEntity.TablePurchase.TABLE_NAME} " +
                 "set ${DBEntity.TablePurchase.COLUMN_ITEM_CHECKED_STATUS} = 'canceled', " +
                 "${DBEntity.TablePurchase.COLUMN_TOTAL_PAID} = 0 where ${DBEntity.TablePurchase.COLUMN_ID} = ?", arrayOf(id))
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TablePurchase.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "cancel")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     private fun insertPurchaseDetails(purchase_id: String, product: Product) {
@@ -1479,10 +1862,29 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         }
 
         writableDatabase.insert(DBEntity.TablePayment.TABLE_NAME, null, contentValues)
+
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TablePayment.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, payment.id)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "insert")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun deletePayment(paymentId: String) {
         writableDatabase.delete(DBEntity.TablePayment.TABLE_NAME, "${DBEntity.TablePayment.COLUMN_ID} = ?", arrayOf(paymentId))
+        val logContentValues = ContentValues().apply {
+            put(DBEntity.TableLog.COLUMN_ID, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_DATETIME, dateFormatter.format(Date()))
+            put(DBEntity.TableLog.COLUMN_TABLE_NAME, DBEntity.TablePayment.TABLE_NAME)
+            put(DBEntity.TableLog.COLUMN_PRIMARY_KEY, paymentId)
+            put(DBEntity.TableLog.COLUMN_COMMAND, "delete")
+            put(DBEntity.TableLog.COLUMN_COMMITTER, AccountSharedPreferences(context).username)
+        }
+        writableDatabase.insert(DBEntity.TableLog.TABLE_NAME, null, logContentValues)
     }
 
     fun deletePaymentByPurchaseId(purchaseId: String) {

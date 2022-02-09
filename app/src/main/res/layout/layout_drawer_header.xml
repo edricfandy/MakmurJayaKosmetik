@@ -5,7 +5,7 @@
     android:layout_height="240dp"
     android:padding="20dp"
     android:gravity="bottom"
-    android:background="@color/main_yellow" >
+    android:background="@color/navy" >
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -16,12 +16,13 @@
         android:layout_marginTop="10dp"
         android:text="@string/app_name"
         android:fontFamily="@font/poppins_bold"
-        android:textColor="@color/dark_brown"
+        android:textColor="@color/white"
         android:textAllCaps="true"
         android:textSize="18sp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_type"
+        android:textColor="@color/white"
         android:fontFamily="@font/poppins_regular" />
 </LinearLayout>
